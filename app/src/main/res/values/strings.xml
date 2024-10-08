@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">discooker</string>
+    <string name="favoris">Favoris</string>
+    <string name="recettes">Recettes</string>
 </resources>
