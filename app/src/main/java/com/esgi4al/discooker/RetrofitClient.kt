@@ -4,6 +4,7 @@ import com.esgi4al.discooker.models.RecipeModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 object RetrofitClient {
     private const val BASE_URL = "http://localhost:8000/"
@@ -14,8 +15,8 @@ object RetrofitClient {
         .build()
 
     interface RecipeApiService {
-        @GET("recipe/id")
-        fun getRecipeDetails(): RecipeModel
+        @GET("recipes/{id}")
+        suspend fun getRecipeDetails(@Path("id") id: String): RecipeModel
     }
 
     object RecipeApi {

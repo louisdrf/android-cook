@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
     implementation(libs.material.v1120)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
