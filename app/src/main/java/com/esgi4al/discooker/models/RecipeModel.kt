@@ -1,11 +1,11 @@
 package com.esgi4al.discooker.models
 
 data class RecipeModel(
-    val id: Int,
-    val title: String,
-    val category: String,
-    val area: String,
-    val thumb: String,
-    val instructions: String,
-    val ingredients: List<String>
+    val _id: String,
+    val strMeal: String,
+    val strCategory: String,
+    val strArea: String,
+    val strMealThumb: String,
+    val strInstructions: String,
+    val ingredients: List<Ingredient>
 )
