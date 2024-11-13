@@ -2,4 +2,15 @@
     <string name="app_name">discooker</string>
     <string name="favoris">Favoris</string>
     <string name="recettes">Recettes</string>
+
+    <string name="login_title">Login</string>
+    <string name="register_title">Register</string>
+    <string name="username_hint">Username</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="register_button">Register</string>
+    <string name="login_button">Login</string>
+    <string name="d_connexion">Déconnexion</string>
+    <string name="recipes_fragment">Recipes Fragment</string>
+
 </resources>
