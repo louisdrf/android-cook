@@ -2,11 +2,14 @@ package com.esgi4al.discooker.ui.recipe
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.RecipeModel
@@ -36,6 +39,41 @@ class RecipeDetailFragment : Fragment() {
     }
 
     private fun updateUI(recipe: RecipeModel) {
+        val gridLayout = view?.findViewById<GridLayout>(R.id.recipe_ingredients)
+
+        gridLayout?.removeAllViews()
+
+        recipe.ingredients.forEach { ingredient ->
+            val ingredientLayout = LinearLayout(context).apply {
+                orientation = LinearLayout.VERTICAL
+                gravity = Gravity.CENTER_HORIZONTAL
+                layoutParams = GridLayout.LayoutParams().apply {
+                    width = 0
+                    height = GridLayout.LayoutParams.WRAP_CONTENT
+                    columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+                }
+            }
+
+            val imageView = ImageView(context).apply {
+                val imageUrl = "https://www.themealdb.com/images/ingredients/${ingredient.name}.png"
+                load(imageUrl)
+                layoutParams = ViewGroup.LayoutParams(150, 150)
+            }
+            val ingredientNameTextView = TextView(context).apply {
+                text = ingredient.name
+                gravity = Gravity.CENTER
+            }
+            val ingredientQuantityTextView = TextView(context).apply {
+                text = ingredient.quantity
+                gravity = Gravity.CENTER
+            }
+
+            ingredientLayout.addView(imageView)
+            ingredientLayout.addView(ingredientNameTextView)
+            ingredientLayout.addView(ingredientQuantityTextView)
+
+            gridLayout?.addView(ingredientLayout)
+        }
         view?.findViewById<TextView>(R.id.recipe_title_tv)?.text = recipe.title
         view?.findViewById<TextView>(R.id.recipe_region_tv)?.text = recipe.region
         view?.findViewById<TextView>(R.id.recipe_category_tv)?.text = recipe.category
