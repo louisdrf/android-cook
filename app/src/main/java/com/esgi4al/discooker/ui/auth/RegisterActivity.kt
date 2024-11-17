@@ -41,7 +41,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun register(username: String, email: String, password: String) {
         val registerRequest = RegisterRequest(username = username, email = email, password = password)
 
-        ApiClient.getApiService().register(registerRequest).enqueue(object : Callback<RegisterResponse> {
+        ApiClient.getAuthService().register(registerRequest).enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                 if (response.isSuccessful) {
                     startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))

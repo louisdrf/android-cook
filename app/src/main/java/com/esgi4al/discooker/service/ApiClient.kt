@@ -11,7 +11,11 @@ object ApiClient {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    fun getApiService(): ApiService {
-        return retrofit.create(ApiService::class.java)
+    fun getAuthService(): AuthService {
+        return retrofit.create(AuthService::class.java)
+    }
+
+    fun getRecipeService(): RecipeService {
+        return retrofit.create(RecipeService::class.java)
     }
 }
