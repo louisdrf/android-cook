@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -76,17 +75,11 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
                 } else {
                     val responseCode = response.code()
                     val responseMessage = response.message()
-                    Toast.makeText(
-                        requireContext(),
-                        "Erreur de chargement des recettes aimées. Code: $responseCode, Message: $responseMessage",
-                        Toast.LENGTH_LONG
-                    ).show()
                     Log.e("FavoriteFragment", "Erreur de réponse: $responseCode - $responseMessage")
                 }
             }
 
             override fun onFailure(call: Call<ApiResponseGetLikedRecipes>, t: Throwable) {
-                Toast.makeText(requireContext(), "Échec de la connexion au serveur", Toast.LENGTH_SHORT).show()
                 Log.e("FavoriteFragment", "Erreur de connexion: ${t.message}")
             }
         })
@@ -118,12 +111,6 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
                 isRemoving = false
-
-                Toast.makeText(
-                    requireContext(),
-                    "Échec de la suppression : ${t.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
                 Log.e("FavoriteFragment", "Échec de la connexion : ${t.message}")
             }
         })

@@ -7,8 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.Recipe
-
-import android.widget.Toast
 import com.google.android.material.button.MaterialButton
 
 class RecipeAdapter(
@@ -34,12 +32,6 @@ class RecipeAdapter(
 
         holder.favoriteButton.setOnClickListener {
             onFavoriteClicked(recipe)
-
-            Toast.makeText(
-                holder.itemView.context,
-                "${recipe.title} supprimé des favoris",
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
 
