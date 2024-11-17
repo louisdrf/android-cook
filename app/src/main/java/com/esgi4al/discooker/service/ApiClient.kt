@@ -46,11 +46,14 @@ object ApiClient {
             .build()
     }
 
-    fun getApiService(): ApiService {
-        return getRetrofit().create(ApiService::class.java)
+    fun getAuthService(): AuthService {
+        return getRetrofit().create(AuthService::class.java)
+    }
+    fun getFavService(): FavService {
+        return getRetrofit().create(FavService::class.java)
     }
 
     fun getRecipeService(): RecipeService {
-        return retrofit.create(RecipeService::class.java)
+        return getRetrofit().create(RecipeService::class.java)
     }
 }

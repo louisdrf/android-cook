@@ -61,7 +61,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
     }
 
     private fun fetchLikedRecipes() {
-        val apiService = ApiClient.getApiService()
+        val apiService = ApiClient.getFavService()
         apiService.getLikedRecipesByUser().enqueue(object : Callback<ApiResponseGetLikedRecipes> {
             override fun onResponse(
                 call: Call<ApiResponseGetLikedRecipes>,
@@ -102,7 +102,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
         }
 
         isRemoving = true
-        val apiService = ApiClient.getApiService()
+        val apiService = ApiClient.getFavService()
         apiService.unlikeRecipe(recipe._id).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 isRemoving = false

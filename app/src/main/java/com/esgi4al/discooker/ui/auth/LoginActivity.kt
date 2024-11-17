@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
                 if (username.isEmpty() || password.isEmpty()) {
                     showErrorDialog("Validation Error", "Username and password cannot be empty.")
                 }
-                val response: Response<ResponseBody> = ApiClient.getApiService().login(loginRequest)
+                val response: Response<ResponseBody> = ApiClient.getAuthService().login(loginRequest)
                 Log.d("coderesponse", "Response Body: ${response}")
 
                 if (response.isSuccessful) {
