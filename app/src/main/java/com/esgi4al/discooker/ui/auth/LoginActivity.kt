@@ -45,7 +45,10 @@ class LoginActivity : AppCompatActivity() {
         val loginRequest = LoginRequest(username = username, password = password)
         lifecycleScope.launch {
             try {
-                val response: Response<ResponseBody> = ApiClient.getAuthService().login(loginRequest)
+                if (username.isEmpty() || password.isEmpty()) {
+                    showErrorDialog("Validation Error", "Username and password cannot be empty.")
+                }
+                val response: Response<ResponseBody> = ApiClient.getApiService().login(loginRequest)
                 Log.d("coderesponse", "Response Body: ${response}")
 
                 if (response.isSuccessful) {
