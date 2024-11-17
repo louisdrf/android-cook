@@ -21,10 +21,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/recipe_area_tv"
+            android:id="@+id/recipe_region_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Area"
+            android:text="Region"
             android:layout_marginTop="5dp" />
 
         <TextView
@@ -68,7 +68,7 @@
             android:id="@+id/recipe_instructions_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginTop="15dp" />
 
     </LinearLayout>

@@ -36,10 +36,10 @@ class RecipeDetailFragment : Fragment() {
     }
 
     private fun updateUI(recipe: RecipeModel) {
-        view?.findViewById<TextView>(R.id.recipe_title_tv)?.text = recipe.strMeal
-        view?.findViewById<TextView>(R.id.recipe_area_tv)?.text = recipe.strArea
-        view?.findViewById<TextView>(R.id.recipe_category_tv)?.text = recipe.strCategory
-        view?.findViewById<TextView>(R.id.recipe_instructions_tv)?.text = recipe.strInstructions
-        view?.findViewById<ImageView>(R.id.recipe_thumb_iv)?.load(recipe.strMealThumb)
+        view?.findViewById<TextView>(R.id.recipe_title_tv)?.text = recipe.title
+        view?.findViewById<TextView>(R.id.recipe_region_tv)?.text = recipe.region
+        view?.findViewById<TextView>(R.id.recipe_category_tv)?.text = recipe.category
+        view?.findViewById<TextView>(R.id.recipe_instructions_tv)?.text = recipe.instructions.joinToString("\n") { it.instruction }
+        // TODO view?.findViewById<ImageView>(R.id.recipe_thumb_iv)?.load(recipe.strMealThumb)
     }
 }

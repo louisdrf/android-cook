@@ -17,7 +17,7 @@ class RecipeDetailViewModel : ViewModel() {
     fun getRecipeDetails() {
         viewModelScope.launch {
             try {
-                val result = recipeService.getRecipeDetails("670d70b78c302e46bf700145")
+                val result = recipeService.getRecipeDetails("672a861d4c3ba57b722c6534")
                 _recipe.postValue(result)
             } catch (e: Exception) {
                 Log.e("RecipeDetailViewModel", "Erreur inattendue: ${e.message}")
