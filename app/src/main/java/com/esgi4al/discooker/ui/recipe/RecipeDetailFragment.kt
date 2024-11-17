@@ -1,3 +1,4 @@
+/*
 package com.esgi4al.discooker.ui.recipe
 
 import androidx.fragment.app.viewModels
@@ -80,4 +81,4 @@ class RecipeDetailFragment : Fragment() {
         view?.findViewById<TextView>(R.id.recipe_instructions_tv)?.text = recipe.instructions.joinToString("\n") { it.instruction }
         // TODO view?.findViewById<ImageView>(R.id.recipe_thumb_iv)?.load(recipe.strMealThumb)
     }
-}
+}*/

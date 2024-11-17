@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/navigation_recipe"
-        android:enabled="true"
-        android:icon="@drawable/ic_recipe"
-        android:title="@string/recettes" />
+        android:title=""
+        android:icon="@drawable/restaurant_24px"
+        android:contentDescription="@string/recipe_icon"
+        android:layout_marginStart="0dp" />
     <item
         android:id="@+id/navigation_favorite"
-        android:enabled="true"
-        android:icon="@drawable/ic_favorite"
-        android:title="@string/favoris" />
+        android:title=""
+        android:icon="@drawable/baseline_favorite_24"
+        android:contentDescription="@string/like_button"
+        android:layout_marginStart="0dp" />
 </menu>

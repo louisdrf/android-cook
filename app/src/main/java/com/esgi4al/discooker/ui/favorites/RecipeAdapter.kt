@@ -1,75 +1,59 @@
 package com.esgi4al.discooker.ui.favorites
 
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.esgi4al.discooker.R
-import com.esgi4al.discooker.models.RecipeModel
-import com.esgi4al.discooker.network.ApiClient
-import com.esgi4al.discooker.ui.auth.LoginActivity
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.esgi4al.discooker.models.Recipe
 
-class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
+import android.widget.Toast
+import com.google.android.material.button.MaterialButton
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var recipeAdapter: RecipeAdapter
+class RecipeAdapter(
+    private var recipes: List<Recipe>,
+    private val onFavoriteClicked: (Recipe) -> Unit
+) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_favorite, container, false)
-
-        // Déconnexion
-        val logoutButton: Button = rootView.findViewById(R.id.logout_button)
-        logoutButton.setOnClickListener {
-            val sharedPreferences = requireActivity().getSharedPreferences("app_prefs", AppCompatActivity.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.remove("auth_token")
-            editor.apply()
-
-            val loginIntent = Intent(requireContext(), LoginActivity::class.java)
-            startActivity(loginIntent)
-            requireActivity().finish()
-        }
-
-        // RecyclerView setup
-        recyclerView = rootView.findViewById(R.id.recipesRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recipeAdapter = RecipeAdapter(emptyList())
-        recyclerView.adapter = recipeAdapter
-
-        fetchRecipes()
-
-        return rootView
+    class RecipeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val titleTextView: TextView = view.findViewById(R.id.recipeTitle)
+        val descriptionTextView: TextView = view.findViewById(R.id.recipeDescription)
+        val favoriteButton: MaterialButton = view.findViewById(R.id.favoriteButton)
     }
 
-    private fun fetchRecipes() {
-        val apiService = ApiClient.getApiService()
-        apiService.getRecipes().enqueue(object : Callback<List<RecipeModel>> {
-            override fun onResponse(call: Call<List<RecipeModel>>, response: Response<List<RecipeModel>>) {
-                if (response.isSuccessful) {
-                    response.body()?.let { recipes ->
-                        recipeAdapter.updateData(recipes)
-                    }
-                } else {
-                    Toast.makeText(requireContext(), "Erreur de chargement des recettes", Toast.LENGTH_SHORT).show()
-                }
-            }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.favorite_item_recipe, parent, false)
+        return RecipeViewHolder(view)
+    }
 
-            override fun onFailure(call: Call<List<RecipeModel>>, t: Throwable) {
-                Toast.makeText(requireContext(), "Échec de la connexion au serveur", Toast.LENGTH_SHORT).show()
-            }
-        })
+    override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
+        val recipe = recipes[position]
+        holder.titleTextView.text = recipe.title
+        holder.descriptionTextView.text = recipe.description
+
+        holder.favoriteButton.setOnClickListener {
+            onFavoriteClicked(recipe)
+
+            Toast.makeText(
+                holder.itemView.context,
+                "${recipe.title} supprimé des favoris",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return recipes.size
+    }
+
+    val currentList: List<Recipe>
+        get() = recipes
+
+
+    fun updateData(newRecipes: List<Recipe>) {
+        recipes = newRecipes
+        notifyDataSetChanged()
     }
 }
+

@@ -12,5 +12,7 @@
     <string name="login_button">Login</string>
     <string name="d_connexion">Déconnexion</string>
     <string name="recipes_fragment">Recipes Fragment</string>
+    <string name="like_button">Like button</string>
+    <string name="recipe_icon">recipe icon</string>
 
 </resources>
