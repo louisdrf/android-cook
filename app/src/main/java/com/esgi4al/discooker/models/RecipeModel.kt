@@ -5,7 +5,7 @@ data class RecipeModel(
     val title: String,
     val category: String,
     val region: String,
-    val strMealThumb: String,
+    val thumbnail: String?,
     val instructions: List<Instruction>,
     val ingredients: List<Ingredient>
 )

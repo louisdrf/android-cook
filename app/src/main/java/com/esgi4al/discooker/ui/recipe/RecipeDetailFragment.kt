@@ -1,4 +1,3 @@
-/*
 package com.esgi4al.discooker.ui.recipe
 
 import androidx.fragment.app.viewModels
@@ -42,8 +41,6 @@ class RecipeDetailFragment : Fragment() {
     private fun updateUI(recipe: RecipeModel) {
         val gridLayout = view?.findViewById<GridLayout>(R.id.recipe_ingredients)
 
-        gridLayout?.removeAllViews()
-
         recipe.ingredients.forEach { ingredient ->
             val ingredientLayout = LinearLayout(context).apply {
                 orientation = LinearLayout.VERTICAL
@@ -75,10 +72,16 @@ class RecipeDetailFragment : Fragment() {
 
             gridLayout?.addView(ingredientLayout)
         }
+
+        if (recipe.thumbnail.isNullOrEmpty()) {
+            view?.findViewById<ImageView>(R.id.recipe_thumb_iv)?.setImageResource(R.drawable.ic_recipeplaceholder)
+        } else {
+            view?.findViewById<ImageView>(R.id.recipe_thumb_iv)?.load(recipe.thumbnail)
+        }
+
         view?.findViewById<TextView>(R.id.recipe_title_tv)?.text = recipe.title
         view?.findViewById<TextView>(R.id.recipe_region_tv)?.text = recipe.region
         view?.findViewById<TextView>(R.id.recipe_category_tv)?.text = recipe.category
         view?.findViewById<TextView>(R.id.recipe_instructions_tv)?.text = recipe.instructions.joinToString("\n") { it.instruction }
-        // TODO view?.findViewById<ImageView>(R.id.recipe_thumb_iv)?.load(recipe.strMealThumb)
     }
-}*/
+}
