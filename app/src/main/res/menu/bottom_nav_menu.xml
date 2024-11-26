@@ -8,9 +8,9 @@
         android:contentDescription="@string/recipe_icon"
         android:layout_marginStart="0dp" />
     <item
-        android:id="@+id/navigation_favorite"
+        android:id="@+id/navigation_account"
         android:title=""
-        android:icon="@drawable/baseline_favorite_24"
-        android:contentDescription="@string/like_button"
+        android:icon="@drawable/person_24px"
+        android:contentDescription="@string/account_button"
         android:layout_marginStart="0dp" />
 </menu>

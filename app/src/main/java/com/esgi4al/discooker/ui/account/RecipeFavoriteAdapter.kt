@@ -1,5 +1,6 @@
-package com.esgi4al.discooker.ui.favorites
+package com.esgi4al.discooker.ui.account
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +10,11 @@ import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.Recipe
 import com.google.android.material.button.MaterialButton
 
-class RecipeAdapter(
+class RecipeFavoriteAdapter(
     private var recipes: List<Recipe>,
-    private val onFavoriteClicked: (Recipe) -> Unit
-) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
+    private val onFavoriteClicked: (Recipe) -> Unit,
+    private val showFavoriteButton: Boolean
+) : RecyclerView.Adapter<RecipeFavoriteAdapter.RecipeViewHolder>() {
 
     class RecipeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.recipeTitle)
@@ -21,7 +23,8 @@ class RecipeAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.favorite_item_recipe, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.account_favorite_item_recipe, parent, false)
         return RecipeViewHolder(view)
     }
 
@@ -30,8 +33,13 @@ class RecipeAdapter(
         holder.titleTextView.text = recipe.title
         holder.descriptionTextView.text = recipe.description
 
-        holder.favoriteButton.setOnClickListener {
-            onFavoriteClicked(recipe)
+        if (showFavoriteButton) {
+            holder.favoriteButton.visibility = View.VISIBLE
+            holder.favoriteButton.setOnClickListener {
+                onFavoriteClicked(recipe)
+            }
+        } else {
+            holder.favoriteButton.visibility = View.GONE
         }
     }
 
@@ -42,10 +50,9 @@ class RecipeAdapter(
     val currentList: List<Recipe>
         get() = recipes
 
-
     fun updateData(newRecipes: List<Recipe>) {
+        Log.d("RecipeAdapterFavorites", "Nouvelle liste de recettes : $newRecipes")
         recipes = newRecipes
         notifyDataSetChanged()
     }
 }
-

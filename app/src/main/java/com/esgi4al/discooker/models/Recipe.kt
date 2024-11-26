@@ -5,6 +5,10 @@ data class ApiResponseGetLikedRecipes(
     val data: List<Recipe>
 )
 
+data class ApiResponseGetRecipes(
+    val data: List<Recipe>
+)
+
 
 data class Recipe(
     val _id: String,

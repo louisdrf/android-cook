@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private const val BASE_URL = "http://192.168.1.153:8000/api/"
+    private const val BASE_URL = "http://10.66.126.247:8000/api/"
 
     private var sharedPreferences: SharedPreferences? = null
 
@@ -49,8 +49,8 @@ object ApiClient {
     fun getAuthService(): AuthService {
         return getRetrofit().create(AuthService::class.java)
     }
-    fun getFavService(): FavService {
-        return getRetrofit().create(FavService::class.java)
+    fun getAccountService(): AccountService {
+        return getRetrofit().create(AccountService::class.java)
     }
 
     fun getRecipeService(): RecipeService {

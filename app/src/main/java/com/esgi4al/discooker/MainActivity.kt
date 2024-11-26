@@ -3,11 +3,11 @@ package com.esgi4al.discooker
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.esgi4al.discooker.ui.favorites.FavoriteFragment
 import com.esgi4al.discooker.ui.recipes.RecipeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import com.esgi4al.discooker.service.ApiClient
+import com.esgi4al.discooker.ui.account.AccountFragment
 import com.esgi4al.discooker.ui.auth.LoginActivity
 
 class MainActivity : AppCompatActivity() {
@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(RecipeFragment())
                     true
                 }
-                R.id.navigation_favorite -> {
-                    loadFragment(FavoriteFragment())
+                R.id.navigation_account -> {
+                    loadFragment(AccountFragment())
                     true
                 }
                 else -> false
