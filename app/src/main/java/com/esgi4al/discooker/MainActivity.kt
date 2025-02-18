@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        ApiClient.init(this)
         val sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
         val token = sharedPreferences.getString("auth_token", null)
 

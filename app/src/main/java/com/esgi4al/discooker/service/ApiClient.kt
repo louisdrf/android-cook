@@ -2,6 +2,7 @@ package com.esgi4al.discooker.service
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -9,16 +10,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private const val BASE_URL = "http://10.66.126.247:8000/api/"
+    private const val BASE_URL = "http://10.0.2.2:8000/api/"
 
     private var sharedPreferences: SharedPreferences? = null
 
     fun init(context: Context) {
-        sharedPreferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+       sharedPreferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
     }
 
     private fun getClient(): OkHttpClient {
-        val prefs = sharedPreferences
+       val prefs = sharedPreferences
             ?: throw IllegalStateException("ApiClient must be initialized with a context by calling ApiClient.init(context)")
 
         val token = prefs.getString("auth_token", null)
