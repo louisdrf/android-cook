@@ -13,7 +13,7 @@ interface AuthService {
 
     @POST("auth/signin")
     suspend fun login(@Body loginRequest: LoginRequest): Response<ResponseBody>
+
     @POST("auth/signup")
     fun register(@Body request: RegisterRequest): Call<RegisterResponse>
-
 }

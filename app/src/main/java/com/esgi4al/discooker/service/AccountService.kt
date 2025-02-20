@@ -11,12 +11,13 @@ import retrofit2.http.Path
 interface AccountService {
     @GET("like/userLikes")
     fun getLikedRecipesByUser(): Call<ApiResponseGetLikedRecipes>
+
     @GET("recipes/recipeByUser")
     fun getUserRecipes(): Call<List<Recipe>>
+
     @POST("recipes/{id}/like")
     fun likeRecipe(@Path("id") recipeId: String): Call<Void>
+
     @DELETE("like/{id}")
     fun unlikeRecipe(@Path("id") recipeId: String): Call<Void>
-
-
 }
