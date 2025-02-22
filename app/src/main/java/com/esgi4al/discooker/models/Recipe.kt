@@ -6,7 +6,7 @@ data class ApiResponseGetLikedRecipes(
 )
 
 data class ApiResponseGetRecipes(
-    val data: List<Recipe>
+    val recipes: List<Recipe>
 )
 
 

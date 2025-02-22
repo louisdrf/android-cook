@@ -45,7 +45,7 @@ class HomePageGlobalDataRepository {
     suspend fun getAllRecipes(): List<Recipe>? {
         return try {
             withContext(Dispatchers.IO) {
-                globalDataService.getRecipes()
+                globalDataService.getRecipes().recipes
             }
         } catch (e: HttpException) {
             Log.e("API_ERROR", "HTTP Error: ${e.code()} - ${e.message()}")
