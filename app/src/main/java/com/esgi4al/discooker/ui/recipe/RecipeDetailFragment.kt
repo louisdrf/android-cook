@@ -99,7 +99,7 @@ class RecipeDetailFragment : Fragment() {
         submitButton?.setOnClickListener {
             val comment = commentInput.text.toString()
             if (comment.isNotEmpty()) {
-                viewModel.postRecipeComment(comment)
+                viewModel.postRecipeComment(comment, requireContext())
                 commentInput.text.clear()
             }
         }
