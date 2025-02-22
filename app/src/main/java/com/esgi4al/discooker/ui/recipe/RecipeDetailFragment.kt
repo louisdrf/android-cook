@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -24,6 +26,7 @@ class RecipeDetailFragment : Fragment() {
     }
 
     private val viewModel: RecipeDetailViewModel by viewModels()
+    private lateinit var commentInput: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +40,9 @@ class RecipeDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_recipe_detail, container, false)
+        val view = inflater.inflate(R.layout.fragment_recipe_detail, container, false)
+        commentInput = view.findViewById(R.id.comment_input_et)
+        return view
     }
 
     private fun updateUI(recipe: RecipeModel) {
@@ -89,5 +94,14 @@ class RecipeDetailFragment : Fragment() {
         view?.findViewById<TextView>(R.id.recipe_region_tv)?.text = recipe.region
         view?.findViewById<TextView>(R.id.recipe_category_tv)?.text = recipe.category
         view?.findViewById<TextView>(R.id.recipe_instructions_tv)?.text = recipe.instructions.joinToString("\n") { it.instruction }
+
+        val submitButton = view?.findViewById<Button>(R.id.submit_comment_btn)
+        submitButton?.setOnClickListener {
+            val comment = commentInput.text.toString()
+            if (comment.isNotEmpty()) {
+                viewModel.postRecipeComment(comment)
+                commentInput.text.clear()
+            }
+        }
     }
 }

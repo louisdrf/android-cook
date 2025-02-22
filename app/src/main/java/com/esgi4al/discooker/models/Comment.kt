@@ -4,3 +4,7 @@ data class Comment(
     val user: User,
     val content: String
 )
+
+data class CommentRequest(
+    val content: String
+)
