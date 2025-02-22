@@ -7,5 +7,6 @@ data class RecipeModel(
     val region: String,
     val thumbnail: String?,
     val instructions: List<Instruction>,
-    val ingredients: List<Ingredient>
+    val ingredients: List<Ingredient>,
+    val comments: List<Comment>
 )

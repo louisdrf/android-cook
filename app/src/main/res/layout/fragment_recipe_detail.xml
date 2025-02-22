@@ -73,5 +73,32 @@
             android:orientation="vertical"
             android:layout_marginTop="15dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comments"
+            android:layout_marginTop="15dp"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/comment_input_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ajouter un commentaire" />
+        <Button
+            android:id="@+id/submit_comment_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Soumettre" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recipe_comments_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"/>
+
+
     </LinearLayout>
 </ScrollView>
