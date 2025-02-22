@@ -12,7 +12,7 @@ class RegionsRVAdapter(private val regions: List<Region>): RecyclerView.Adapter<
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RegionViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.listable_category, parent, false)
+            .inflate(R.layout.listable_region, parent, false)
         return RegionViewHolder(view)
     }
 

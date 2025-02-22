@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.esgi4al.discooker.service.ApiClient
 import com.esgi4al.discooker.ui.account.AccountFragment
 import com.esgi4al.discooker.ui.auth.LoginActivity
+import com.esgi4al.discooker.ui.fragments.HomePageFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_recipe -> {
-                    loadFragment(RecipeFragment())
+                    loadFragment(HomePageFragment())
                     true
                 }
                 R.id.navigation_account -> {

@@ -2,7 +2,6 @@ package com.esgi4al.discooker.service
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -45,6 +44,10 @@ object ApiClient {
             .client(getClient()) // Appel dynamique pour inclure le dernier token
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    fun getGlobalDataService(): HomePageGlobalDataService {
+        return getRetrofit().create(HomePageGlobalDataService::class.java)
     }
 
     fun getAuthService(): AuthService {
