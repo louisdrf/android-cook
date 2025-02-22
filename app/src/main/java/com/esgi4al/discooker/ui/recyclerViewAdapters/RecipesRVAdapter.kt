@@ -31,8 +31,19 @@ class RecipesRVAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapter
 
         holder.userName.text = recipe.user.username
         holder.recipeTitle.text = recipe.title
-        holder.recipeCategory.text = recipe.category
-        holder.recipeRegion.text = recipe.region
+
+        holder.recipeCategoryName.text = recipe.category.name
+        Glide
+            .with(holder.itemView)
+            .load(recipe.category.imgUrl)
+            .into(holder.recipeCategoryImage)
+
+        holder.recipeRegionName.text = recipe.region.name
+        Glide
+            .with(holder.itemView)
+            .load(recipe.region.imgUrl)
+            .into(holder.recipeRegionImage)
+
         holder.recipeDescription.text = recipe.description
         holder.recipeLikes.text = buildString {
             append(recipe.likes.size.toString())
