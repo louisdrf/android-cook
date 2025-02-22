@@ -11,6 +11,8 @@ import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.RecipeModel
 import coil3.load
@@ -78,6 +80,10 @@ class RecipeDetailFragment : Fragment() {
         } else {
             view?.findViewById<ImageView>(R.id.recipe_thumb_iv)?.load(recipe.thumbnail)
         }
+
+        val commentsRecyclerView = view?.findViewById<RecyclerView>(R.id.recipe_comments_rv)
+        commentsRecyclerView?.layoutManager = LinearLayoutManager(context)
+        commentsRecyclerView?.adapter = CommentsAdapter(recipe.comments)
 
         view?.findViewById<TextView>(R.id.recipe_title_tv)?.text = recipe.title
         view?.findViewById<TextView>(R.id.recipe_region_tv)?.text = recipe.region
