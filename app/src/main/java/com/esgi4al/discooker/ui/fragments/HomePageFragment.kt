@@ -14,13 +14,14 @@ import com.esgi4al.discooker.models.Category
 import com.esgi4al.discooker.models.Recipe
 import com.esgi4al.discooker.models.Region
 import com.esgi4al.discooker.repositories.HomePageGlobalDataRepository
+import com.esgi4al.discooker.ui.interfaces.RecipeClickHandler
 import com.esgi4al.discooker.ui.recyclerViewAdapters.CategoriesRVAdapter
 import com.esgi4al.discooker.ui.recyclerViewAdapters.RecipesRVAdapter
 import com.esgi4al.discooker.ui.recyclerViewAdapters.RegionsRVAdapter
 import com.esgi4al.discooker.ui.viewModels.HomePageViewModel
 import com.esgi4al.discooker.ui.viewModels.factories.HomePageViewModelFactory
 
-class HomePageFragment: Fragment() {
+class HomePageFragment: Fragment(), RecipeClickHandler {
 
     private lateinit var categoriesRv: RecyclerView
     private lateinit var regionsRv: RecyclerView
@@ -62,7 +63,7 @@ class HomePageFragment: Fragment() {
     private fun setUpRecipesRv(recipes: List<Recipe>, fragmentView: View) {
         recipesRv = fragmentView.findViewById(R.id.home_page_recipes_rv)
         recipesRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        recipesRv.adapter = RecipesRVAdapter(recipes)
+        recipesRv.adapter = RecipesRVAdapter(recipes, this)
     }
 
     private fun setUpCategoriesRv(categories: List<Category>, fragmentView: View) {
@@ -81,5 +82,9 @@ class HomePageFragment: Fragment() {
         swipeRefreshLayout.setOnRefreshListener {
             homeViewModel.refreshRecipes()
         }
+    }
+
+    override fun onRecipeClick(recipeId: String) {
+        TODO("Not yet implemented")
     }
 }

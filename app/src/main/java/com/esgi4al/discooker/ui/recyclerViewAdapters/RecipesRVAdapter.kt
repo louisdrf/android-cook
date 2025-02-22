@@ -6,9 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.Recipe
+import com.esgi4al.discooker.ui.interfaces.RecipeClickHandler
 import com.esgi4al.discooker.ui.viewHolders.RecipeViewHolder
 
-class RecipesRVAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapter<RecipeViewHolder>() {
+class RecipesRVAdapter(
+    private val recipes: List<Recipe>,
+    private val recipeClickHandler: RecipeClickHandler
+    ) : RecyclerView.Adapter<RecipeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -44,10 +48,13 @@ class RecipesRVAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapter
             .load(recipe.region.imgUrl)
             .into(holder.recipeRegionImage)
 
-        holder.recipeDescription.text = recipe.description
         holder.recipeLikes.text = buildString {
             append(recipe.likes.size.toString())
             append(" likes")
+        }
+
+        holder.itemView.setOnClickListener {
+            recipeClickHandler.onRecipeClick(recipe._id)
         }
     }
 
