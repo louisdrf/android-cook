@@ -13,13 +13,15 @@ import kotlinx.coroutines.launch
 class RecipeDetailViewModel : ViewModel() {
     private val recipeService = ApiClient.getRecipeService()
     private val _recipe = MutableLiveData<RecipeModel>()
+    private val _isLiked = MutableLiveData<Boolean>()
 
     val recipe: MutableLiveData<RecipeModel> get() = _recipe
+    val isLiked: MutableLiveData<Boolean> get() = _isLiked
 
     fun getRecipeDetails() {
         viewModelScope.launch {
             try {
-                val result = recipeService.getRecipeDetails("672a861d4c3ba57b722c6534")
+                val result = recipeService.getRecipeDetails("67b9d70be7aab78db3115e78")
                 _recipe.postValue(result)
             } catch (e: Exception) {
                 Log.e("RecipeDetailViewModel", "Erreur inattendue lors de la récupération de la recette: ${e.message}")
@@ -30,17 +32,57 @@ class RecipeDetailViewModel : ViewModel() {
     fun postRecipeComment(comment: String, context: Context) {
         viewModelScope.launch {
             try {
-                val sharedPreferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                val sharedPreferences =
+                    context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                 val token = sharedPreferences.getString("auth_token", "") ?: ""
 
                 if (token.isNotEmpty()) {
-                    val result = recipeService.postRecipeComment("672a861d4c3ba57b722c6534", "Bearer $token", CommentRequest(comment))
+                    val result = recipeService.postRecipeComment("67b9d70be7aab78db3115e78", "Bearer $token", CommentRequest(comment))
                     _recipe.postValue(result)
                 } else {
                     Log.e("RecipeDetailViewModel", "Token manquant")
                 }
             } catch (e: Exception) {
                 Log.e("RecipeDetailViewModel", "Erreur inattendue lors de l'envoi de commentaire: ${e.message}")
+            }
+        }
+    }
+
+    fun isRecipeLiked(context: Context) {
+        viewModelScope.launch {
+            try {
+                val sharedPreferences =
+                    context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                val token = sharedPreferences.getString("auth_token", "") ?: ""
+
+                if (token.isNotEmpty()) {
+                    val result =
+                        recipeService.isRecipeLiked("67b9d70be7aab78db3115e78", "Bearer $token")
+                    _isLiked.postValue(result)
+                } else {
+                    Log.e("RecipeDetailViewModel", "Token manquant")
+                }
+            } catch (e: Exception) {
+                Log.e("RecipeDetailViewModel", "Erreur inattendue lors de l'envoi de commentaire: ${e.message}")
+            }
+        }
+    }
+
+    fun toggleLikeRecipe(context: Context, isLiked: Boolean) {
+        viewModelScope.launch {
+            try {
+                val sharedPreferences =
+                    context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                val token = sharedPreferences.getString("auth_token", "") ?: ""
+
+                if (token.isNotEmpty()) {
+                    recipeService.toggleLikeRecipe("67b9d70be7aab78db3115e78", "Bearer $token")
+                    _isLiked.postValue(isLiked)
+                } else {
+                    Log.e("RecipeDetailViewModel", "Token manquant")
+                }
+            } catch (e: Exception) {
+                Log.e("RecipeDetailViewModel", "Erreur inattendue sur le suivi de recette: ${e.message}")
             }
         }
     }

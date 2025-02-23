@@ -21,4 +21,16 @@ interface RecipeService {
         @Header("Authorization") token: String,
         @Body comment: CommentRequest
     ): RecipeModel
+
+    @GET("like/{id}")
+    suspend fun isRecipeLiked(
+        @Path("id") id: String,
+        @Header("Authorization") token: String
+    ): Boolean
+
+    @GET("recipes/{id}/toggle-like")
+    suspend fun toggleLikeRecipe(
+        @Path("id") id: String,
+        @Header("Authorization") token: String
+    ): Boolean
 }

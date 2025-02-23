@@ -3,12 +3,11 @@ package com.esgi4al.discooker
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.esgi4al.discooker.ui.recipes.RecipeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
-import com.esgi4al.discooker.service.ApiClient
 import com.esgi4al.discooker.ui.account.AccountFragment
 import com.esgi4al.discooker.ui.auth.LoginActivity
+import com.esgi4al.discooker.ui.recipe.RecipeDetailFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,12 +24,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        loadFragment(RecipeFragment())
+        loadFragment(RecipeDetailFragment())
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_recipe -> {
-                    loadFragment(RecipeFragment())
+                    loadFragment(RecipeDetailFragment())
                     true
                 }
                 R.id.navigation_account -> {

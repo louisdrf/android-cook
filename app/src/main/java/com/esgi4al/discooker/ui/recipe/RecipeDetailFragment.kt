@@ -32,8 +32,10 @@ class RecipeDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         viewModel.recipe.observe(this) { recipe -> updateUI(recipe)}
+        viewModel.isLiked.observe(this) { isLiked -> updateLiked(isLiked)}
 
         viewModel.getRecipeDetails()
+        viewModel.isRecipeLiked(requireContext())
     }
 
     override fun onCreateView(
@@ -44,6 +46,18 @@ class RecipeDetailFragment : Fragment() {
         commentInput = view.findViewById(R.id.comment_input_et)
         return view
     }
+
+    private fun updateLiked(isLiked: Boolean) {
+        val followTextView = view?.findViewById<TextView>(R.id.follow_tv)
+        followTextView?.text = if (isLiked) "Suivi" else "Suivre"
+
+        followTextView?.setOnClickListener {
+            val newIsLiked = !isLiked
+            updateLiked(newIsLiked)
+            viewModel.toggleLikeRecipe(requireContext(), newIsLiked)
+        }
+    }
+
 
     private fun updateUI(recipe: RecipeModel) {
         val gridLayout = view?.findViewById<GridLayout>(R.id.recipe_ingredients)
