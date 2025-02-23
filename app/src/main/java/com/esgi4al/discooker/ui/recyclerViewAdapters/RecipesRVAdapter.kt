@@ -33,7 +33,10 @@ class RecipesRVAdapter(
             .load("https://robohash.org/${recipe.user.username}")
             .into(holder.userProfileImage)
 
-        holder.userName.text = recipe.user.username
+        holder.userName.text = buildString {
+            append("Créée par ")
+            append(recipe.user.username)
+        }
         holder.recipeTitle.text = recipe.title
 
         holder.recipeCategoryName.text = recipe.category.name
