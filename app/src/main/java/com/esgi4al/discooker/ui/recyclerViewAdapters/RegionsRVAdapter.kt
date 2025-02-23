@@ -1,6 +1,7 @@
 package com.esgi4al.discooker.ui.recyclerViewAdapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -13,6 +14,8 @@ class RegionsRVAdapter(
     private val regions: List<Region>,
     private val clickHandler: HomePageItemsClickHandler
 ): RecyclerView.Adapter<RegionViewHolder>() {
+
+    private var selectedPosition: Int? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RegionViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -32,8 +35,18 @@ class RegionsRVAdapter(
 
         holder.regionName.text = region.name
 
+        holder.closeRegionIcon.visibility = if (position == selectedPosition) View.VISIBLE else View.GONE
+
         holder.itemView.setOnClickListener {
+            selectedPosition = holder.getAdapterPosition()
+            notifyDataSetChanged()
             clickHandler.onRegionClick(region.name)
+        }
+
+        holder.closeRegionIcon.setOnClickListener {
+            selectedPosition = null
+            notifyDataSetChanged()
+            clickHandler.onRegionCloseIconClick()
         }
     }
 }

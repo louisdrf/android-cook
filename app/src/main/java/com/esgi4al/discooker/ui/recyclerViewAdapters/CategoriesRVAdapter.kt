@@ -1,6 +1,7 @@
 package com.esgi4al.discooker.ui.recyclerViewAdapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -13,6 +14,8 @@ class CategoriesRVAdapter(
     private val categories: List<Category>,
     private val clickHandler: HomePageItemsClickHandler
 ): RecyclerView.Adapter<CategoryViewHolder>() {
+
+    private var selectedPosition: Int? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -32,8 +35,18 @@ class CategoriesRVAdapter(
 
         holder.categoryName.text = category.name
 
+        holder.closeCategoryIcon.visibility = if (position == selectedPosition) View.VISIBLE else View.GONE
+
         holder.itemView.setOnClickListener {
+            selectedPosition = holder.getAdapterPosition()
+            notifyDataSetChanged()
             clickHandler.onCategoryClick(category.name)
+        }
+
+        holder.closeCategoryIcon.setOnClickListener {
+            selectedPosition = null
+            notifyDataSetChanged()
+            clickHandler.onCategoryCloseIconClick()
         }
     }
 

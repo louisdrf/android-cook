@@ -29,9 +29,9 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
     private lateinit var regionsRv: RecyclerView
     private lateinit var recipesRv: RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    private var selectedCategoryName: String? = null
-    private var selectedRegionName: String? = null
-    private var currentSearch: String? = null
+    private var selectedCategoryName: String? = ""
+    private var selectedRegionName: String? = ""
+    private var currentSearch: String? = ""
     private lateinit var searchView: androidx.appcompat.widget.SearchView
     private var searchRunnable: Runnable? = null
     private val searchHandler = Handler(Looper.getMainLooper())
@@ -112,7 +112,7 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
 
     private fun setUpSwipeToRefreshListeners() {
         swipeRefreshLayout.setOnRefreshListener {
-            homeViewModel.refreshRecipes()
+            homeViewModel.fetchRecipesBySearch(currentSearch, selectedCategoryName, selectedRegionName)
         }
     }
 
@@ -129,6 +129,18 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
     override fun onRegionClick(regionName: String) {
         swipeRefreshLayout.isRefreshing = true
         selectedRegionName = regionName
+        homeViewModel.fetchRecipesBySearch(currentSearch, selectedCategoryName, selectedRegionName)
+    }
+
+    override fun onCategoryCloseIconClick() {
+        swipeRefreshLayout.isRefreshing = true
+        selectedCategoryName = ""
+        homeViewModel.fetchRecipesBySearch(currentSearch, selectedCategoryName, selectedRegionName)
+    }
+
+    override fun onRegionCloseIconClick() {
+        swipeRefreshLayout.isRefreshing = true
+        selectedRegionName = ""
         homeViewModel.fetchRecipesBySearch(currentSearch, selectedCategoryName, selectedRegionName)
     }
 }

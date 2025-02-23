@@ -4,4 +4,6 @@ interface HomePageItemsClickHandler {
     fun onRecipeClick(recipeId: String)
     fun onCategoryClick(categoryName: String)
     fun onRegionClick(regionName: String)
+    fun onCategoryCloseIconClick()
+    fun onRegionCloseIconClick()
 }
