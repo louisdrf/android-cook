@@ -14,14 +14,14 @@ import com.esgi4al.discooker.models.Category
 import com.esgi4al.discooker.models.Recipe
 import com.esgi4al.discooker.models.Region
 import com.esgi4al.discooker.repositories.HomePageGlobalDataRepository
-import com.esgi4al.discooker.ui.interfaces.RecipeClickHandler
+import com.esgi4al.discooker.ui.interfaces.HomePageItemsClickHandler
 import com.esgi4al.discooker.ui.recyclerViewAdapters.CategoriesRVAdapter
 import com.esgi4al.discooker.ui.recyclerViewAdapters.RecipesRVAdapter
 import com.esgi4al.discooker.ui.recyclerViewAdapters.RegionsRVAdapter
 import com.esgi4al.discooker.ui.viewModels.HomePageViewModel
 import com.esgi4al.discooker.ui.viewModels.factories.HomePageViewModelFactory
 
-class HomePageFragment: Fragment(), RecipeClickHandler {
+class HomePageFragment: Fragment(), HomePageItemsClickHandler {
 
     private lateinit var categoriesRv: RecyclerView
     private lateinit var regionsRv: RecyclerView
@@ -69,13 +69,13 @@ class HomePageFragment: Fragment(), RecipeClickHandler {
     private fun setUpCategoriesRv(categories: List<Category>, fragmentView: View) {
         categoriesRv = fragmentView.findViewById(R.id.home_page_categories_rv)
         categoriesRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        categoriesRv.adapter = CategoriesRVAdapter(categories)
+        categoriesRv.adapter = CategoriesRVAdapter(categories, this)
     }
 
     private fun setUpRegionsRv(regions: List<Region>, fragmentView: View) {
         regionsRv = fragmentView.findViewById(R.id.home_page_regions_rv)
         regionsRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        regionsRv.adapter = RegionsRVAdapter(regions)
+        regionsRv.adapter = RegionsRVAdapter(regions, this)
     }
 
     private fun setUpSwipeToRefreshListeners() {
@@ -86,5 +86,15 @@ class HomePageFragment: Fragment(), RecipeClickHandler {
 
     override fun onRecipeClick(recipeId: String) {
         TODO("Not yet implemented")
+    }
+
+    override fun onCategoryClick(categoryName: String) {
+        swipeRefreshLayout.isRefreshing = true
+        homeViewModel.fetchRecipesByCategoryName(categoryName)
+    }
+
+    override fun onRegionClick(regionName: String) {
+        swipeRefreshLayout.isRefreshing = true
+        homeViewModel.fetchRecipesByRegionName(regionName)
     }
 }

@@ -6,9 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.Category
+import com.esgi4al.discooker.ui.interfaces.HomePageItemsClickHandler
 import com.esgi4al.discooker.ui.viewHolders.CategoryViewHolder
 
-class CategoriesRVAdapter(private val categories: List<Category>): RecyclerView.Adapter<CategoryViewHolder>() {
+class CategoriesRVAdapter(
+    private val categories: List<Category>,
+    private val clickHandler: HomePageItemsClickHandler
+): RecyclerView.Adapter<CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -27,6 +31,10 @@ class CategoriesRVAdapter(private val categories: List<Category>): RecyclerView.
             .into(holder.categoryImage)
 
         holder.categoryName.text = category.name
+
+        holder.itemView.setOnClickListener {
+            clickHandler.onCategoryClick(category.name)
+        }
     }
 
 }

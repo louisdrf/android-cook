@@ -1,6 +1,5 @@
 package com.esgi4al.discooker.ui.viewModels
 
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -31,18 +30,31 @@ class HomePageViewModel(
     val recipes: LiveData<List<Recipe>> get() = _recipes
 
     init {
-        fetchRecipes()
+        fetchAllRecipes()
     }
 
-    private fun fetchRecipes() {
+    fun refreshRecipes() {
+        fetchAllRecipes()
+    }
+
+    fun fetchRecipesByCategoryName(categoryName: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val fetchedRecipes = globalDataRepo.getAllRecipes() ?: emptyList()
-            Log.d("HOME VIEW MODEL", fetchedRecipes.toString())
+            val fetchedRecipes = globalDataRepo.getAllRecipesByCategoryName(categoryName) ?: emptyList()
             _recipes.postValue(fetchedRecipes)
         }
     }
 
-    fun refreshRecipes() {
-        fetchRecipes()
+    fun fetchRecipesByRegionName(regionName: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val fetchedRecipes = globalDataRepo.getAllRecipesByRegionName(regionName) ?: emptyList()
+            _recipes.postValue(fetchedRecipes)
+        }
+    }
+
+    private fun fetchAllRecipes() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val fetchedRecipes = globalDataRepo.getAllRecipes() ?: emptyList()
+            _recipes.postValue(fetchedRecipes)
+        }
     }
 }

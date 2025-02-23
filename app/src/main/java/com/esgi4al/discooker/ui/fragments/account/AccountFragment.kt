@@ -1,4 +1,4 @@
-package com.esgi4al.discooker.ui.account
+package com.esgi4al.discooker.ui.fragments.account
 
 import android.content.Intent
 import android.os.Bundle
@@ -53,7 +53,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         override fun getItemCount(): Int = 2
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 -> FavoriteFragment()
+                0 -> AccountFavoritesFragment()
                 1 -> RecipeFragment()
                 else -> throw IllegalStateException("Invalid position")
             }

@@ -1,4 +1,4 @@
-package com.esgi4al.discooker.ui.account
+package com.esgi4al.discooker.ui.fragments.account
 
 import android.os.Bundle
 import android.util.Log

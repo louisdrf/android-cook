@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.Recipe
-import com.esgi4al.discooker.ui.interfaces.RecipeClickHandler
+import com.esgi4al.discooker.ui.interfaces.HomePageItemsClickHandler
 import com.esgi4al.discooker.ui.viewHolders.RecipeViewHolder
 
 class RecipesRVAdapter(
     private val recipes: List<Recipe>,
-    private val recipeClickHandler: RecipeClickHandler
+    private val recipeClickHandler: HomePageItemsClickHandler
     ) : RecyclerView.Adapter<RecipeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
