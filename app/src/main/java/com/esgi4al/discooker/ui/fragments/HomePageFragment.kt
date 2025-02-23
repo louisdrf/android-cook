@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,7 @@ import com.esgi4al.discooker.ui.viewModels.factories.HomePageViewModelFactory
 
 class HomePageFragment: Fragment(), HomePageItemsClickHandler {
 
+    private lateinit var searchResultsTv: TextView
     private lateinit var categoriesRv: RecyclerView
     private lateinit var regionsRv: RecyclerView
     private lateinit var recipesRv: RecyclerView
@@ -45,6 +47,7 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_home_page, container, false)
+        searchResultsTv = view.findViewById(R.id.search_results_tv)
         swipeRefreshLayout = view.findViewById(R.id.home_swipe_refresh_layout)
         searchView = view.findViewById(R.id.searchBarRecipes)
         return view
@@ -65,6 +68,12 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
         }
 
         homeViewModel.recipes.observe(viewLifecycleOwner) { recipes ->
+            val resultsText = if (recipes.isEmpty()) {
+                "Aucune recette ne correspond à votre recherche."
+            } else {
+                "${recipes.size} recettes trouvées."
+            }
+            searchResultsTv.text = resultsText
             setUpRecipesRv(recipes, view)
             swipeRefreshLayout.isRefreshing = false
         }
