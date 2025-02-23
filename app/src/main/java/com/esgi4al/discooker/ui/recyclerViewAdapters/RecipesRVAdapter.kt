@@ -6,9 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.Recipe
+import com.esgi4al.discooker.ui.interfaces.HomePageItemsClickHandler
 import com.esgi4al.discooker.ui.viewHolders.RecipeViewHolder
 
-class RecipesRVAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapter<RecipeViewHolder>() {
+class RecipesRVAdapter(
+    private val recipes: List<Recipe>,
+    private val recipeClickHandler: HomePageItemsClickHandler
+    ) : RecyclerView.Adapter<RecipeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -29,14 +33,31 @@ class RecipesRVAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapter
             .load("https://robohash.org/${recipe.user.username}")
             .into(holder.userProfileImage)
 
-        holder.userName.text = recipe.user.username
+        holder.userName.text = buildString {
+            append("Créée par ")
+            append(recipe.user.username)
+        }
         holder.recipeTitle.text = recipe.title
-        holder.recipeCategory.text = recipe.category
-        holder.recipeRegion.text = recipe.region
-        holder.recipeDescription.text = recipe.description
+
+        holder.recipeCategoryName.text = recipe.category.name
+        Glide
+            .with(holder.itemView)
+            .load(recipe.category.imgUrl)
+            .into(holder.recipeCategoryImage)
+
+        holder.recipeRegionName.text = recipe.region.name
+        Glide
+            .with(holder.itemView)
+            .load(recipe.region.imgUrl)
+            .into(holder.recipeRegionImage)
+
         holder.recipeLikes.text = buildString {
             append(recipe.likes.size.toString())
             append(" likes")
+        }
+
+        holder.itemView.setOnClickListener {
+            recipeClickHandler.onRecipeClick(recipe._id)
         }
     }
 

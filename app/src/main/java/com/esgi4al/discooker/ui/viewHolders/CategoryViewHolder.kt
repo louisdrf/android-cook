@@ -10,4 +10,5 @@ class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     val categoryName: TextView = itemView.findViewById(R.id.categoryName)
     val categoryImage: ImageView = itemView.findViewById(R.id.categoryImage)
+    val closeCategoryIcon: ImageView = itemView.findViewById(R.id.closeCategoryIcon)
 }

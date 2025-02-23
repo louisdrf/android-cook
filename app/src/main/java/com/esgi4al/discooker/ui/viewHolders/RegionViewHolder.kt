@@ -10,4 +10,5 @@ class RegionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     val regionName: TextView = itemView.findViewById(R.id.regionName)
     val regionImage: ImageView = itemView.findViewById(R.id.regionImage)
+    val closeRegionIcon: ImageView = itemView.findViewById(R.id.closeRegionIcon)
 }

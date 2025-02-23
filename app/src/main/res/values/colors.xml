@@ -4,4 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="status_bar_color">#2196F3</color>
     <color name="colorPrimary">#2196F3</color>
+    <color name="selected_category_color">#FF9800</color>
+    <color name="default_category_color">#FFFFFF</color>
+    <color name="selected_region_color">#FF9800</color>
+    <color name="default_region_color">#FFFFFF</color>
+    <color name="recipe_user_header_color">#F8F8F8</color>
 </resources>

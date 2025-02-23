@@ -1,35 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <com.google.android.material.card.MaterialCardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="6dp"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="4dp"
+    android:backgroundTint="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:padding="6dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+        <androidx.cardview.widget.CardView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginVertical="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="50dp">
 
             <ImageView
                 android:id="@+id/categoryImage"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="8dp" />
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="12dp"
+                android:contentDescription="Image de la catégorie"
+                android:scaleType="centerCrop" />
 
-            <TextView
-                android:id="@+id/categoryName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nom de la catégorie"
-                android:textSize="10sp"
-                android:textColor="@android:color/black"
-                android:ellipsize="end"
-                android:maxLines="1" />
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-    </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:id="@+id/categoryName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nom de la catégorie"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:maxLines="1"
+            android:fontFamily="sans-serif-medium" />
 
+        <ImageView
+            android:id="@+id/closeCategoryIcon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:visibility="gone"
+        android:contentDescription="Fermer" />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

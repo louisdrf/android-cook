@@ -4,31 +4,60 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
     app:cardCornerRadius="6dp"
-    android:padding="6dp">
+    app:cardElevation="4dp"
+    android:backgroundTint="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:padding="6dp">
 
-        <ImageView
-            android:id="@+id/regionImage"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="8dp" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginVertical="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="50dp">
 
+            <ImageView
+                android:id="@+id/regionImage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="12dp"
+                android:contentDescription="Image de la région"
+                android:scaleType="centerCrop" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Texte de la région -->
         <TextView
             android:id="@+id/regionName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Nom de la region"
-            android:textSize="10sp"
+            android:layout_weight="1"
+            android:text="Nom de la région"
+            android:textSize="14sp"
             android:textColor="@android:color/black"
-            android:ellipsize="end"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:fontFamily="sans-serif-medium" />
+
+        <ImageView
+            android:id="@+id/closeRegionIcon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:visibility="gone"
+            android:contentDescription="Fermer" />
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

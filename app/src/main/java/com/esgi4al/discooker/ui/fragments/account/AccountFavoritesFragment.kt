@@ -1,4 +1,4 @@
-package com.esgi4al.discooker.ui.account
+package com.esgi4al.discooker.ui.fragments.account
 
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
+class AccountFavoritesFragment : Fragment(R.layout.fragment_favorite) {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var recipeFavoriteAdapter: RecipeFavoriteAdapter

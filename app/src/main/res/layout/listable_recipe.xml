@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:backgroundTint="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,38 +16,64 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- En-tête : Image de profil et nom de l'utilisateur -->
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            app:cardCornerRadius="8dp"
+            android:layout_marginBottom="6dp"
+            android:backgroundTint="@color/recipe_user_header_color"
+            android:padding="4dp">
 
-            <ImageView
-                android:id="@+id/userProfileImage"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:scaleType="centerCrop"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="Image du profil utilisateur" />
-
-            <TextView
-                android:id="@+id/userName"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nom de l'utilisateur"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-        <!-- Image de la recette -->
-        <ImageView
-            android:id="@+id/recipeImage"
+                <ImageView
+                    android:id="@+id/userProfileImage"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="12dp"
+                    android:contentDescription="Image du profil utilisateur"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nom de l'utilisateur"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="8dp"
-            android:scaleType="centerCrop"
-            android:contentDescription="Image de la recette" />
+            android:layout_height="180dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="12dp">
+
+                <ImageView
+                    android:id="@+id/recipeImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Image de la recette"
+                    android:layout_gravity="center"/>
+
+        </androidx.cardview.widget.CardView>
+
 
         <!-- Nom de la recette -->
         <TextView
@@ -53,42 +81,113 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="Nom de la recette"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
 
         <!-- Catégorie et Région -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="6dp">
 
-            <TextView
-                android:id="@+id/recipeCategory"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Catégorie"
-                android:textSize="14sp"
-                android:layout_marginRight="10dp" />
+                app:cardCornerRadius="8dp"
+                android:backgroundTint="@android:color/white">
 
-            <TextView
-                android:id="@+id/recipeRegion"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="6dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginVertical="2dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="8dp"
+                        app:cardCornerRadius="50dp">
+
+                        <ImageView
+                            android:id="@+id/recipeCategoryImage"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="12dp"
+                            android:contentDescription="Image de la catégorie"
+                            android:scaleType="centerCrop" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/recipeCategoryName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Nom de la catégorie"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/black"
+                        android:maxLines="1"
+                        android:fontFamily="sans-serif-medium" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Région -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Région"
-                android:textSize="14sp" />
+                android:layout_marginLeft="12dp"
+                app:cardCornerRadius="8dp"
+                android:backgroundTint="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="6dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginVertical="2dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="8dp"
+                        app:cardCornerRadius="50dp">
+
+                        <ImageView
+                            android:id="@+id/recipeRegionImage"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="12dp"
+                            android:contentDescription="Image de la région"
+                            android:scaleType="centerCrop" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Texte de la région -->
+                    <TextView
+                        android:id="@+id/recipeRegionName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Nom de la région"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/black"
+                        android:maxLines="1"
+                        android:fontFamily="sans-serif-medium" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
-
-        <!-- Description de la recette -->
-        <TextView
-            android:id="@+id/recipeDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Description de la recette"
-            android:textSize="14sp" />
 
         <!-- Nombre de likes -->
         <TextView
@@ -98,8 +197,8 @@
             android:layout_marginTop="12dp"
             android:text="123 likes"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_red_dark" />
 
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>

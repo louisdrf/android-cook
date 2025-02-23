@@ -6,7 +6,7 @@ data class ApiResponseGetLikedRecipes(
 )
 
 data class ApiResponseGetRecipes(
-    val data: List<Recipe>
+    val recipes: List<Recipe>
 )
 
 
@@ -18,8 +18,8 @@ data class Recipe(
     val thumbnail: String?,
     val ingredients: List<Ingredient>,
     val instructions: List<Instruction>,
-    val category: String,
-    val region: String,
+    val category: Category,
+    val region: Region,
     val likes: List<String>,
     val createdAt: String,
     val updatedAt: String
