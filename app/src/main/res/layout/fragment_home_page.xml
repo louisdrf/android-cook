@@ -50,11 +50,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nos suggestions"
+        android:text="Toutes les recettes"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
         android:layout_marginBottom="8dp"/>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchBarRecipes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Rechercher une recette"
+        android:iconifiedByDefault="false"
+        android:layout_marginBottom="16dp"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/home_swipe_refresh_layout"
@@ -68,6 +76,7 @@
             android:orientation="vertical"
             android:overScrollMode="never"
             android:nestedScrollingEnabled="false"/>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

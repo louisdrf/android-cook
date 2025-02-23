@@ -14,6 +14,20 @@ class HomePageGlobalDataRepository {
 
     private val globalDataService = ApiClient.getGlobalDataService()
 
+    suspend fun getRecipesBySearch(recipeName: String?, categoryName: String?, regionName: String?): List<Recipe>? {
+        return try {
+            withContext(Dispatchers.IO) {
+                globalDataService.getRecipesBySearch(recipeName, categoryName, regionName)
+            }
+        } catch (e: HttpException) {
+            Log.e("API_ERROR", "HTTP Error: ${e.code()} - ${e.message()}")
+            null
+        } catch (e: Exception) {
+            Log.e("API_ERROR", "Network Error: ${e.message}")
+            null
+        }
+    }
+
     suspend fun getAllRecipesByCategoryName(categoryName: String): List<Recipe>? {
         return try {
             withContext(Dispatchers.IO) {

@@ -51,6 +51,13 @@ class HomePageViewModel(
         }
     }
 
+    fun fetchRecipesBySearch(recipeName: String?, categoryName: String?, regionName: String?) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val fetchedRecipes = globalDataRepo.getRecipesBySearch(recipeName, categoryName, regionName) ?: emptyList()
+            _recipes.postValue(fetchedRecipes)
+        }
+    }
+
     private fun fetchAllRecipes() {
         viewModelScope.launch(Dispatchers.IO) {
             val fetchedRecipes = globalDataRepo.getAllRecipes() ?: emptyList()

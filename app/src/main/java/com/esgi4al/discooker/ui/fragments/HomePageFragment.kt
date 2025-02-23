@@ -1,6 +1,8 @@
 package com.esgi4al.discooker.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +29,12 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
     private lateinit var regionsRv: RecyclerView
     private lateinit var recipesRv: RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private var selectedCategoryName: String? = null
+    private var selectedRegionName: String? = null
+    private var currentSearch: String? = null
+    private lateinit var searchView: androidx.appcompat.widget.SearchView
+    private var searchRunnable: Runnable? = null
+    private val searchHandler = Handler(Looper.getMainLooper())
 
     private val homeViewModel: HomePageViewModel by viewModels {
         HomePageViewModelFactory(HomePageGlobalDataRepository(), this)
@@ -38,6 +46,7 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
     ): View {
         val view = inflater.inflate(R.layout.fragment_home_page, container, false)
         swipeRefreshLayout = view.findViewById(R.id.home_swipe_refresh_layout)
+        searchView = view.findViewById(R.id.searchBarRecipes)
         return view
     }
 
@@ -45,6 +54,7 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
         super.onViewCreated(view, savedInstanceState)
 
         setUpSwipeToRefreshListeners()
+        setUpSearchView()
 
         homeViewModel.categories.observe(viewLifecycleOwner) { categories ->
             setUpCategoriesRv(categories, view)
@@ -58,6 +68,28 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
             setUpRecipesRv(recipes, view)
             swipeRefreshLayout.isRefreshing = false
         }
+    }
+
+    private fun setUpSearchView() {
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                swipeRefreshLayout.isRefreshing = false
+                currentSearch = newText
+
+                searchRunnable?.let { searchHandler.removeCallbacks(it) }
+
+                searchRunnable = Runnable {
+                    homeViewModel.fetchRecipesBySearch(newText, selectedCategoryName, selectedRegionName)
+                }
+
+                searchHandler.postDelayed(searchRunnable!!, 200)
+                return true
+            }
+        })
     }
 
     private fun setUpRecipesRv(recipes: List<Recipe>, fragmentView: View) {
@@ -90,11 +122,13 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
 
     override fun onCategoryClick(categoryName: String) {
         swipeRefreshLayout.isRefreshing = true
-        homeViewModel.fetchRecipesByCategoryName(categoryName)
+        selectedCategoryName = categoryName
+        homeViewModel.fetchRecipesBySearch(currentSearch, selectedCategoryName, selectedRegionName)
     }
 
     override fun onRegionClick(regionName: String) {
         swipeRefreshLayout.isRefreshing = true
-        homeViewModel.fetchRecipesByRegionName(regionName)
+        selectedRegionName = regionName
+        homeViewModel.fetchRecipesBySearch(currentSearch, selectedCategoryName, selectedRegionName)
     }
 }
