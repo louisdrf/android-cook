@@ -97,7 +97,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
+                app:cardCornerRadius="32dp"
                 android:backgroundTint="@android:color/white">
 
                 <LinearLayout
@@ -131,6 +131,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Nom de la catégorie"
+                        android:layout_marginEnd="6dp"
                         android:textSize="12sp"
                         android:textColor="@android:color/black"
                         android:maxLines="1"
@@ -144,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                app:cardCornerRadius="8dp"
+                app:cardCornerRadius="32dp"
                 android:backgroundTint="@android:color/white">
 
                 <LinearLayout
@@ -180,6 +181,7 @@
                         android:layout_weight="1"
                         android:text="Nom de la région"
                         android:textSize="12sp"
+                        android:layout_marginEnd="6dp"
                         android:textColor="@android:color/black"
                         android:maxLines="1"
                         android:fontFamily="sans-serif-medium" />
