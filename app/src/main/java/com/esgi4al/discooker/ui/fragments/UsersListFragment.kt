@@ -74,7 +74,7 @@ class UsersListFragment: Fragment() {
                 searchRunnable?.let { searchHandler.removeCallbacks(it) }
 
                 searchRunnable = Runnable {
-                    usersListViewModel.fetchAllUsers()
+                    usersListViewModel.getUsersBySearch(currentSearch)
                 }
 
                 searchHandler.postDelayed(searchRunnable!!, 200)

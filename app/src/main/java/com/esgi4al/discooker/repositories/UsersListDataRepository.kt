@@ -11,10 +11,10 @@ class UsersListDataRepository {
 
     private val usersService = ApiClient.getUsersService()
 
-    suspend fun getAllUsers(): List<ListableUser>? {
+    suspend fun getUsersBySearch(username: String?): List<ListableUser>? {
         return try {
             withContext(Dispatchers.IO) {
-                usersService.getAllUsers()
+                usersService.getUserBySearch(username)
             }
         } catch (e: HttpException) {
             Log.e("API_ERROR", "HTTP Error: ${e.code()} - ${e.message()}")

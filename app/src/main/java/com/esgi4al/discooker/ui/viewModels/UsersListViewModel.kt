@@ -19,12 +19,12 @@ class UsersListViewModel(
     val users: LiveData<List<ListableUser>> get() = _users
 
     init {
-        fetchAllUsers()
+        getUsersBySearch("")
     }
 
-    private fun fetchAllUsers() {
+    fun getUsersBySearch(username: String?) {
         viewModelScope.launch(Dispatchers.IO) {
-            val fetchedUsers = globalUsersDataRepo.getAllUsers() ?: emptyList()
+            val fetchedUsers = globalUsersDataRepo.getUsersBySearch(username) ?: emptyList()
             _users.postValue(fetchedUsers)
         }
     }

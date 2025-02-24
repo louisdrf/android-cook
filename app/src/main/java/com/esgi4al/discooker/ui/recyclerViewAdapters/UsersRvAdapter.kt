@@ -28,8 +28,8 @@ class UsersRvAdapter(
 
         holder.userName.text = user.username
 
-        holder.userNbCumulatedLikes.text = "10"
-        holder.userNbCumulatedRecipes.text = "10"
+        holder.userNbCumulatedLikes.text = user.nbLikes.toString()
+        holder.userNbCumulatedRecipes.text = user.nbRecipes.toString()
     }
 
     override fun getItemCount(): Int = users.size
