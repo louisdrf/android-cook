@@ -1,4 +1,4 @@
-package com.esgi4al.discooker.ui.fragments
+package com.esgi4al.discooker.ui.fragments.users
 
 import android.os.Bundle
 import android.os.Handler
