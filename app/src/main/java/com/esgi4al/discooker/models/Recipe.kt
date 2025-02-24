@@ -21,6 +21,7 @@ data class Recipe(
     val category: Category,
     val region: Region,
     val likes: List<String>,
+    val comments: List<Comment>,
     val createdAt: String,
     val updatedAt: String
 )

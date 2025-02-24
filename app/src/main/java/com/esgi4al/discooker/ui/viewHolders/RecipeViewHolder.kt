@@ -19,5 +19,6 @@ class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val recipeRegionName: TextView = itemView.findViewById(R.id.recipeRegionName)
     val recipeRegionImage: ImageView = itemView.findViewById(R.id.recipeRegionImage)
 
-    val recipeLikes: TextView = itemView.findViewById(R.id.recipeLikes)
+    val recipeLikes: TextView = itemView.findViewById(R.id.recipeNbLikes)
+    val recipeComments: TextView = itemView.findViewById(R.id.recipeNbComments)
 }

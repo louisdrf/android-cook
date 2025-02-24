@@ -51,10 +51,8 @@ class RecipesRVAdapter(
             .load(recipe.region.imgUrl)
             .into(holder.recipeRegionImage)
 
-        holder.recipeLikes.text = buildString {
-            append(recipe.likes.size.toString())
-            append(" likes")
-        }
+        recipe.likes.size.toString().also { holder.recipeLikes.text = it }
+        recipe.comments.size.toString().also { holder.recipeComments.text = it }
 
         holder.itemView.setOnClickListener {
             recipeClickHandler.onRecipeClick(recipe._id)

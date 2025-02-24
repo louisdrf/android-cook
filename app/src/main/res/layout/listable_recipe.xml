@@ -190,15 +190,52 @@
         </LinearLayout>
 
         <!-- Nombre de likes -->
-        <TextView
-            android:id="@+id/recipeLikes"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="123 likes"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_red_dark" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:id="@+id/recipeNbLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="165"
+                android:textSize="12sp"
+                android:layout_marginEnd="4dp"
+                android:textColor="@android:color/black" />
+
+            <ImageView
+                android:id="@+id/likeIcon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/baseline_favorite_24"
+                android:contentDescription="Icône de like" />
+
+            <Space
+                android:layout_width="6dp"
+                android:layout_height="0dp"/>
+
+            <TextView
+                android:id="@+id/recipeNbComments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8"
+                android:textSize="12sp"
+                android:layout_marginEnd="4dp"
+                android:textColor="@android:color/black" />
+
+            <ImageView
+                android:id="@+id/commentIcon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_comment"
+                android:contentDescription="Icône de like" />
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
