@@ -4,10 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.Recipe
 import com.esgi4al.discooker.ui.interfaces.HomePageItemsClickHandler
 import com.esgi4al.discooker.ui.viewHolders.RecipeViewHolder
+
 
 class RecipesRVAdapter(
     private val recipes: List<Recipe>,
@@ -23,9 +26,14 @@ class RecipesRVAdapter(
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val recipe = this.recipes[position]
 
+        val requestOptions = RequestOptions()
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .error(R.drawable.ic_recipeplaceholder)
+
         Glide
             .with(holder.itemView)
             .load(recipe.thumbnail)
+            .apply(requestOptions)
             .into(holder.recipeImage)
 
         Glide
