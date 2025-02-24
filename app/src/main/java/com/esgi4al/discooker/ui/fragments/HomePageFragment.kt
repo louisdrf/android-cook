@@ -20,7 +20,6 @@ import com.esgi4al.discooker.models.Region
 import com.esgi4al.discooker.repositories.HomePageGlobalDataRepository
 import com.esgi4al.discooker.ui.interfaces.FragmentNavigation
 import com.esgi4al.discooker.ui.interfaces.HomePageItemsClickHandler
-import com.esgi4al.discooker.ui.recipe.RecipeDetailFragment
 import com.esgi4al.discooker.ui.recyclerViewAdapters.CategoriesRVAdapter
 import com.esgi4al.discooker.ui.recyclerViewAdapters.RecipesRVAdapter
 import com.esgi4al.discooker.ui.recyclerViewAdapters.RegionsRVAdapter

@@ -1,4 +1,4 @@
-package com.esgi4al.discooker.ui.recipe
+package com.esgi4al.discooker.ui.viewModels
 
 import android.content.Context
 import android.util.Log
