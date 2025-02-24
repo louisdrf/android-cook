@@ -10,6 +10,6 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     val userProfileImage: ImageView = itemView.findViewById(R.id.listableUserProfileImage)
     val userName: TextView = itemView.findViewById(R.id.listableUserName)
-    val userNbCumultedLikes: TextView = itemView.findViewById(R.id.listableUserCumulatedLikes)
-    val userNbCumultedRecipes: TextView = itemView.findViewById(R.id.listableUserCumulatedRecipes)
+    val userNbCumulatedLikes: TextView = itemView.findViewById(R.id.listableUserCumulatedLikes)
+    val userNbCumulatedRecipes: TextView = itemView.findViewById(R.id.listableUserCumulatedRecipes)
 }
