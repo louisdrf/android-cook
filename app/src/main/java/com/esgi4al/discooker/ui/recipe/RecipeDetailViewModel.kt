@@ -3,25 +3,25 @@ package com.esgi4al.discooker.ui.recipe
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.esgi4al.discooker.models.RecipeModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.esgi4al.discooker.models.CommentRequest
+import com.esgi4al.discooker.models.Recipe
 import com.esgi4al.discooker.service.ApiClient
 import kotlinx.coroutines.launch
 
 class RecipeDetailViewModel : ViewModel() {
     private val recipeService = ApiClient.getRecipeService()
-    private val _recipe = MutableLiveData<RecipeModel>()
+    private val _recipe = MutableLiveData<Recipe>()
     private val _isLiked = MutableLiveData<Boolean>()
 
-    val recipe: MutableLiveData<RecipeModel> get() = _recipe
+    val recipe: MutableLiveData<Recipe> get() = _recipe
     val isLiked: MutableLiveData<Boolean> get() = _isLiked
 
-    fun getRecipeDetails() {
+    fun getRecipeDetails(recipeId: String) {
         viewModelScope.launch {
             try {
-                val result = recipeService.getRecipeDetails("67b9d70be7aab78db3115e78")
+                val result = recipeService.getRecipeDetails(recipeId)
                 _recipe.postValue(result)
             } catch (e: Exception) {
                 Log.e("RecipeDetailViewModel", "Erreur inattendue lors de la récupération de la recette: ${e.message}")
@@ -29,7 +29,7 @@ class RecipeDetailViewModel : ViewModel() {
         }
     }
 
-    fun postRecipeComment(comment: String, context: Context) {
+    fun postRecipeComment(recipeId: String, comment: String, context: Context) {
         viewModelScope.launch {
             try {
                 val sharedPreferences =
@@ -37,7 +37,7 @@ class RecipeDetailViewModel : ViewModel() {
                 val token = sharedPreferences.getString("auth_token", "") ?: ""
 
                 if (token.isNotEmpty()) {
-                    val result = recipeService.postRecipeComment("67b9d70be7aab78db3115e78", "Bearer $token", CommentRequest(comment))
+                    val result = recipeService.postRecipeComment(recipeId, "Bearer $token", CommentRequest(comment))
                     _recipe.postValue(result)
                 } else {
                     Log.e("RecipeDetailViewModel", "Token manquant")
@@ -48,7 +48,7 @@ class RecipeDetailViewModel : ViewModel() {
         }
     }
 
-    fun isRecipeLiked(context: Context) {
+    fun isRecipeLiked(recipeId: String, context: Context) {
         viewModelScope.launch {
             try {
                 val sharedPreferences =
@@ -56,8 +56,7 @@ class RecipeDetailViewModel : ViewModel() {
                 val token = sharedPreferences.getString("auth_token", "") ?: ""
 
                 if (token.isNotEmpty()) {
-                    val result =
-                        recipeService.isRecipeLiked("67b9d70be7aab78db3115e78", "Bearer $token")
+                    val result = recipeService.isRecipeLiked(recipeId, "Bearer $token")
                     _isLiked.postValue(result)
                 } else {
                     Log.e("RecipeDetailViewModel", "Token manquant")
@@ -68,7 +67,7 @@ class RecipeDetailViewModel : ViewModel() {
         }
     }
 
-    fun toggleLikeRecipe(context: Context, isLiked: Boolean) {
+    fun toggleLikeRecipe(recipeId: String, context: Context, isLiked: Boolean) {
         viewModelScope.launch {
             try {
                 val sharedPreferences =
@@ -76,7 +75,7 @@ class RecipeDetailViewModel : ViewModel() {
                 val token = sharedPreferences.getString("auth_token", "") ?: ""
 
                 if (token.isNotEmpty()) {
-                    recipeService.toggleLikeRecipe("67b9d70be7aab78db3115e78", "Bearer $token")
+                    recipeService.toggleLikeRecipe(recipeId, "Bearer $token")
                     _isLiked.postValue(isLiked)
                 } else {
                     Log.e("RecipeDetailViewModel", "Token manquant")

@@ -16,26 +16,40 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esgi4al.discooker.R
-import com.esgi4al.discooker.models.RecipeModel
 import coil3.load
+import com.esgi4al.discooker.models.Recipe
 
 class RecipeDetailFragment : Fragment() {
 
     companion object {
-        fun newInstance() = RecipeDetailFragment()
+        fun newInstance(recipeId: String): RecipeDetailFragment {
+            val fragment = RecipeDetailFragment()
+            val args = Bundle()
+            args.putString("recipe_id", recipeId)
+            fragment.arguments = args
+            return fragment
+        }
     }
 
     private val viewModel: RecipeDetailViewModel by viewModels()
+    private var recipeId: String? = null
     private lateinit var commentInput: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        recipeId = arguments?.getString("recipe_id")
+    }
 
-        viewModel.recipe.observe(this) { recipe -> updateUI(recipe)}
-        viewModel.isLiked.observe(this) { isLiked -> updateLiked(isLiked)}
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getRecipeDetails()
-        viewModel.isRecipeLiked(requireContext())
+        viewModel.recipe.observe(viewLifecycleOwner) { recipe -> updateUI(recipe)}
+        viewModel.isLiked.observe(viewLifecycleOwner) { isLiked -> updateLiked(isLiked)}
+
+        recipeId?.let {
+            viewModel.getRecipeDetails(recipeId!!)
+            viewModel.isRecipeLiked(recipeId!!, requireContext())
+        }
     }
 
     override fun onCreateView(
@@ -54,12 +68,13 @@ class RecipeDetailFragment : Fragment() {
         followTextView?.setOnClickListener {
             val newIsLiked = !isLiked
             updateLiked(newIsLiked)
-            viewModel.toggleLikeRecipe(requireContext(), newIsLiked)
+            recipeId?.let {
+                viewModel.toggleLikeRecipe(recipeId!!, requireContext(), newIsLiked)
+            }
         }
     }
 
-
-    private fun updateUI(recipe: RecipeModel) {
+    private fun updateUI(recipe: Recipe) {
         val gridLayout = view?.findViewById<GridLayout>(R.id.recipe_ingredients)
 
         recipe.ingredients.forEach { ingredient ->
@@ -105,15 +120,17 @@ class RecipeDetailFragment : Fragment() {
         commentsRecyclerView?.adapter = CommentsAdapter(recipe.comments)
 
         view?.findViewById<TextView>(R.id.recipe_title_tv)?.text = recipe.title
-        view?.findViewById<TextView>(R.id.recipe_region_tv)?.text = recipe.region
-        view?.findViewById<TextView>(R.id.recipe_category_tv)?.text = recipe.category
+        view?.findViewById<TextView>(R.id.recipe_region_tv)?.text = recipe.region.name
+        view?.findViewById<TextView>(R.id.recipe_category_tv)?.text = recipe.category.name
         view?.findViewById<TextView>(R.id.recipe_instructions_tv)?.text = recipe.instructions.joinToString("\n") { it.instruction }
 
         val submitButton = view?.findViewById<Button>(R.id.submit_comment_btn)
         submitButton?.setOnClickListener {
             val comment = commentInput.text.toString()
             if (comment.isNotEmpty()) {
-                viewModel.postRecipeComment(comment, requireContext())
+                recipeId?.let {
+                    viewModel.postRecipeComment(recipeId!!, comment, requireContext())
+                }
                 commentInput.text.clear()
             }
         }

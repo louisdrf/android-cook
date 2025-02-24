@@ -3,14 +3,14 @@ package com.esgi4al.discooker
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.esgi4al.discooker.ui.recipes.RecipeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import com.esgi4al.discooker.ui.fragments.account.AccountFragment
 import com.esgi4al.discooker.ui.auth.LoginActivity
 import com.esgi4al.discooker.ui.fragments.HomePageFragment
+import com.esgi4al.discooker.ui.interfaces.FragmentNavigation
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FragmentNavigation {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        loadFragment(RecipeFragment())
+        loadFragment(HomePageFragment())
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadFragment(fragment: Fragment) {
+    override fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragment)
         transaction.addToBackStack(null)

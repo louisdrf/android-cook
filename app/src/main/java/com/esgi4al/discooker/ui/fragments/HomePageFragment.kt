@@ -1,5 +1,6 @@
 package com.esgi4al.discooker.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -17,7 +18,9 @@ import com.esgi4al.discooker.models.Category
 import com.esgi4al.discooker.models.Recipe
 import com.esgi4al.discooker.models.Region
 import com.esgi4al.discooker.repositories.HomePageGlobalDataRepository
+import com.esgi4al.discooker.ui.interfaces.FragmentNavigation
 import com.esgi4al.discooker.ui.interfaces.HomePageItemsClickHandler
+import com.esgi4al.discooker.ui.recipe.RecipeDetailFragment
 import com.esgi4al.discooker.ui.recyclerViewAdapters.CategoriesRVAdapter
 import com.esgi4al.discooker.ui.recyclerViewAdapters.RecipesRVAdapter
 import com.esgi4al.discooker.ui.recyclerViewAdapters.RegionsRVAdapter
@@ -35,6 +38,7 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
     private var selectedRegionName: String? = ""
     private var currentSearch: String? = ""
     private lateinit var searchView: androidx.appcompat.widget.SearchView
+    private var fragmentNavigation: FragmentNavigation? = null
     private var searchRunnable: Runnable? = null
     private val searchHandler = Handler(Looper.getMainLooper())
 
@@ -76,6 +80,13 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
             searchResultsTv.text = resultsText
             setUpRecipesRv(recipes, view)
             swipeRefreshLayout.isRefreshing = false
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is FragmentNavigation) {
+            fragmentNavigation = context
         }
     }
 
@@ -126,7 +137,7 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
     }
 
     override fun onRecipeClick(recipeId: String) {
-        TODO("Not yet implemented")
+        fragmentNavigation?.loadFragment(RecipeDetailFragment.newInstance(recipeId))
     }
 
     override fun onCategoryClick(categoryName: String) {
