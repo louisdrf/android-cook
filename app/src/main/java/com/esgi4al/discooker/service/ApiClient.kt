@@ -60,4 +60,8 @@ object ApiClient {
     fun getRecipeService(): RecipeService {
         return getRetrofit().create(RecipeService::class.java)
     }
+
+    fun getUsersService(): UsersService {
+        return getRetrofit().create(UsersService::class.java)
+    }
 }
