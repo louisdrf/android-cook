@@ -1,10 +1,5 @@
 package com.esgi4al.discooker.models
 
-data class ApiResponseGetLikedRecipes(
-    val message: String,
-    val data: List<Recipe>
-)
-
 data class ApiResponseGetRecipes(
     val recipes: List<Recipe>
 )

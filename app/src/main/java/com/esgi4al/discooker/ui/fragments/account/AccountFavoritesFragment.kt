@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esgi4al.discooker.R
-import com.esgi4al.discooker.models.ApiResponseGetLikedRecipes
+import com.esgi4al.discooker.models.ApiResponseGetRecipes
 import com.esgi4al.discooker.models.Recipe
 import com.esgi4al.discooker.service.ApiClient
 import retrofit2.Call
@@ -43,25 +43,26 @@ class AccountFavoritesFragment : Fragment(R.layout.fragment_favorite) {
 
     private fun fetchLikedRecipes() {
         val apiService = ApiClient.getAccountService()
-        apiService.getLikedRecipesByUser().enqueue(object : Callback<ApiResponseGetLikedRecipes> {
+
+        apiService.getLikedRecipesByUser().enqueue(object : Callback<ApiResponseGetRecipes> {
             override fun onResponse(
-                call: Call<ApiResponseGetLikedRecipes>,
-                response: Response<ApiResponseGetLikedRecipes>
+                call: Call<ApiResponseGetRecipes>,
+                response: Response<ApiResponseGetRecipes>
             ) {
                 if (response.isSuccessful) {
                     val apiResponse = response.body()
-                    apiResponse?.let {
-                        recipeFavoriteAdapter.updateData(it.data)
-                        Log.d("FavoriteFragment", "Recettes récupérées avec succès.")
+                    if (apiResponse != null) {
+                        recipeFavoriteAdapter.updateData(apiResponse.recipes)
+                        Log.d("FavoriteFragment", "Recettes récupérées : ${apiResponse.recipes.size} recettes")
+                    } else {
+                        Log.e("FavoriteFragment", "Réponse vide")
                     }
                 } else {
-                    val responseCode = response.code()
-                    val responseMessage = response.message()
-                    Log.e("FavoriteFragment", "Erreur de réponse: $responseCode - $responseMessage")
+                    Log.e("FavoriteFragment", "Erreur API: ${response.code()} - ${response.message()}")
                 }
             }
 
-            override fun onFailure(call: Call<ApiResponseGetLikedRecipes>, t: Throwable) {
+            override fun onFailure(call: Call<ApiResponseGetRecipes>, t: Throwable) {
                 Log.e("FavoriteFragment", "Erreur de connexion: ${t.message}")
             }
         })
