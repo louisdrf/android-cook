@@ -214,7 +214,8 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:src="@drawable/baseline_favorite_24"
-                android:contentDescription="Icône de like" />
+                android:contentDescription="Icône de like"
+                app:tint="@color/discooker_red_color" />
 
             <Space
                 android:layout_width="6dp"
@@ -234,6 +235,7 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:src="@drawable/ic_comment"
+                app:tint="@color/discooker_red_color"
                 android:contentDescription="Icône de like" />
 
         </LinearLayout>
