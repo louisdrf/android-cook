@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
-import com.esgi4al.discooker.ui.fragments.account.AccountFragment
 import com.esgi4al.discooker.ui.auth.LoginActivity
 import com.esgi4al.discooker.ui.fragments.HomePageFragment
+import com.esgi4al.discooker.ui.fragments.users.UsersListFragment
 import com.esgi4al.discooker.ui.interfaces.FragmentNavigation
 
 class MainActivity : AppCompatActivity(), FragmentNavigation {
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), FragmentNavigation {
                     true
                 }
                 R.id.navigation_account -> {
-                    loadFragment(AccountFragment())
+                    loadFragment(UsersListFragment())
                     true
                 }
                 else -> false
