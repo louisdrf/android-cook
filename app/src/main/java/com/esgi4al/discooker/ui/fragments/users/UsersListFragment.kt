@@ -1,5 +1,6 @@
 package com.esgi4al.discooker.ui.fragments.users
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -15,12 +16,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.ListableUser
 import com.esgi4al.discooker.repositories.UsersListDataRepository
-import com.esgi4al.discooker.ui.recyclerViewAdapters.UsersRvAdapter
+import com.esgi4al.discooker.ui.interfaces.FragmentNavigation
+import com.esgi4al.discooker.ui.interfaces.UserItemClickHandler
+import com.esgi4al.discooker.ui.recyclerViewAdapters.users.UsersRvAdapter
 import com.esgi4al.discooker.ui.viewModels.UsersListViewModel
 import com.esgi4al.discooker.ui.viewModels.factories.UsersListViewModelFactory
 
-class UsersListFragment: Fragment() {
+class UsersListFragment: Fragment(), UserItemClickHandler {
 
+    private var fragmentNavigation: FragmentNavigation? = null
     private lateinit var usersListRv: RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var searchResultsTv: TextView
@@ -31,6 +35,13 @@ class UsersListFragment: Fragment() {
 
     private val usersListViewModel: UsersListViewModel by viewModels {
         UsersListViewModelFactory(UsersListDataRepository(), this)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is FragmentNavigation) {
+            fragmentNavigation = context
+        }
     }
 
     override fun onCreateView(
@@ -87,6 +98,10 @@ class UsersListFragment: Fragment() {
     private fun setUpUsersRv(users: List<ListableUser>, fragmentView: View) {
         usersListRv = fragmentView.findViewById(R.id.users_list_rv)
         usersListRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        usersListRv.adapter = UsersRvAdapter(users)
+        usersListRv.adapter = UsersRvAdapter(users, this)
+    }
+
+    override fun onUserClick(userId: String) {
+        fragmentNavigation?.loadFragment(UserProfileFragment.newInstance(userId))
     }
 }
