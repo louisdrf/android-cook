@@ -22,13 +22,13 @@ interface RecipeService {
         @Body comment: CommentRequest
     ): Recipe
 
-    @GET("like/{id}")
+    @GET("like/isLiked/{id}")
     suspend fun isRecipeLiked(
         @Path("id") id: String,
         @Header("Authorization") token: String
     ): Boolean
 
-    @GET("recipes/{id}/toggle-like")
+    @POST("like/{id}")
     suspend fun toggleLikeRecipe(
         @Path("id") id: String,
         @Header("Authorization") token: String
