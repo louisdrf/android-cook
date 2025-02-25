@@ -38,7 +38,6 @@ class UserProfileFragment: Fragment(), UserRecipeClickHandler {
             val args = Bundle()
             args.putString("userId", userId)
             fragment.arguments = args
-            Log.d("USER PROFILE FRAGMENT", "user profile args : " + fragment.arguments)
             return fragment
         }
     }
@@ -64,6 +63,7 @@ class UserProfileFragment: Fragment(), UserRecipeClickHandler {
         val userId = arguments?.getString("userId") ?: return
 
         viewModel.getUserData(userId)
+        viewModel.getUserRecipes(userId)
 
         viewModel.userData.observe(viewLifecycleOwner) { userData ->
             setUpUserCardData(userData, view)

@@ -23,7 +23,18 @@ class UserProfileViewModel(private val userDataRepo: UserProfileDataRepository, 
                 val userData = userDataRepo.getUserData(userId)
                 _userData.postValue(userData)
             } catch (e: Exception) {
-                Log.e("UserProfileViewModel", "Erreur inattendue lors de la récupération de les infos utilisateur: ${e.message}")
+                Log.e("UserProfileViewModel", "Erreur inattendue lors de la récupération des infos utilisateur: ${e.message}")
+            }
+        }
+    }
+
+    fun getUserRecipes(userId: String) {
+        viewModelScope.launch {
+            try {
+                val userRecipes = userDataRepo.getUserRecipes(userId) ?: emptyList()
+                _userRecipes.postValue(userRecipes)
+            } catch (e: Exception) {
+                Log.e("UserProfileViewModel", "Erreur inattendue lors de la récupération des recettes de l'utilisateur: ${e.message}")
             }
         }
     }
