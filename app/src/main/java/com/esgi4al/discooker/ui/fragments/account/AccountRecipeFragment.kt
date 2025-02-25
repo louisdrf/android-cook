@@ -11,14 +11,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.Recipe
 import com.esgi4al.discooker.service.ApiClient
+import com.esgi4al.discooker.ui.recyclerViewAdapters.account.AccountRecipeAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RecipeFragment : Fragment(R.layout.fragment_recipe) {
+class AccountRecipeFragment : Fragment(R.layout.fragment_recipe) {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var recipeAdapter: RecipeAdapter
+    private lateinit var recipeAdapter: AccountRecipeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +29,7 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
 
         recyclerView = rootView.findViewById(R.id.recyclerViewRecipes)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recipeAdapter = RecipeAdapter(emptyList())
+        recipeAdapter = AccountRecipeAdapter(emptyList())
         recyclerView.adapter = recipeAdapter
 
         fetchRecipes()

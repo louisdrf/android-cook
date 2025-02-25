@@ -1,4 +1,4 @@
-package com.esgi4al.discooker.ui.recyclerViewAdapters
+package com.esgi4al.discooker.ui.recyclerViewAdapters.recipes
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,24 +8,24 @@ import com.bumptech.glide.Glide
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.Region
 import com.esgi4al.discooker.ui.interfaces.HomePageItemsClickHandler
-import com.esgi4al.discooker.ui.viewHolders.RegionViewHolder
+import com.esgi4al.discooker.ui.viewHolders.list_items.ListableRegionViewHolder
 
 class RegionsRVAdapter(
     private val regions: List<Region>,
     private val clickHandler: HomePageItemsClickHandler
-): RecyclerView.Adapter<RegionViewHolder>() {
+): RecyclerView.Adapter<ListableRegionViewHolder>() {
 
     private var selectedPosition: Int? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RegionViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListableRegionViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.listable_region, parent, false)
-        return RegionViewHolder(view)
+        return ListableRegionViewHolder(view)
     }
 
     override fun getItemCount(): Int = regions.size
 
-    override fun onBindViewHolder(holder: RegionViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListableRegionViewHolder, position: Int) {
         val region = regions[position]
 
         Glide

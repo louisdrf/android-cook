@@ -1,4 +1,4 @@
-package com.esgi4al.discooker.ui.fragments
+package com.esgi4al.discooker.ui.fragments.recipes
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.esgi4al.discooker.R
 import coil3.load
 import com.esgi4al.discooker.models.Recipe
-import com.esgi4al.discooker.ui.recyclerViewAdapters.CommentsAdapter
+import com.esgi4al.discooker.ui.recyclerViewAdapters.recipes.CommentsAdapter
 import com.esgi4al.discooker.ui.viewModels.RecipeDetailViewModel
 
 class RecipeDetailFragment : Fragment() {

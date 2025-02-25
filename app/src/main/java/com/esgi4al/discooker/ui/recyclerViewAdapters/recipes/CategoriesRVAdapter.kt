@@ -1,4 +1,4 @@
-package com.esgi4al.discooker.ui.recyclerViewAdapters
+package com.esgi4al.discooker.ui.recyclerViewAdapters.recipes
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,24 +8,24 @@ import com.bumptech.glide.Glide
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.Category
 import com.esgi4al.discooker.ui.interfaces.HomePageItemsClickHandler
-import com.esgi4al.discooker.ui.viewHolders.CategoryViewHolder
+import com.esgi4al.discooker.ui.viewHolders.list_items.ListableCategoryViewHolder
 
 class CategoriesRVAdapter(
     private val categories: List<Category>,
     private val clickHandler: HomePageItemsClickHandler
-): RecyclerView.Adapter<CategoryViewHolder>() {
+): RecyclerView.Adapter<ListableCategoryViewHolder>() {
 
     private var selectedPosition: Int? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListableCategoryViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.listable_category, parent, false)
-        return CategoryViewHolder(view)
+        return ListableCategoryViewHolder(view)
     }
 
     override fun getItemCount(): Int = categories.size
 
-    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListableCategoryViewHolder, position: Int) {
         val category = categories[position]
 
         Glide
