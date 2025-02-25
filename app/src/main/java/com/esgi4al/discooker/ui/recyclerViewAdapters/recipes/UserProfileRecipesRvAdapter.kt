@@ -24,7 +24,7 @@ class UserProfileRecipesRvAdapter(
 
     override fun onBindViewHolder(holder: ListableRecipeViewHolder, position: Int) {
         val recipe = this.recipes[position]
-        holder.bind(recipe, true)
+        holder.bind(recipe, false)
 
         Glide.with(holder.itemView).load(recipe.thumbnail)
             .apply(RequestOptions()

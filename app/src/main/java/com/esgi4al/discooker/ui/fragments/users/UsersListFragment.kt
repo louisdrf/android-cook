@@ -58,6 +58,7 @@ class UsersListFragment: Fragment(), UserItemClickHandler {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpSwipeToRefreshListeners()
         setUpSearchView()
 
         usersListViewModel.users.observe(viewLifecycleOwner) { users ->
@@ -69,6 +70,12 @@ class UsersListFragment: Fragment(), UserItemClickHandler {
             searchResultsTv.text = searchResultsText
             setUpUsersRv(users, view)
             swipeRefreshLayout.isRefreshing = false
+        }
+    }
+
+    private fun setUpSwipeToRefreshListeners() {
+        swipeRefreshLayout.setOnRefreshListener {
+            usersListViewModel.getUsersBySearch(currentSearch)
         }
     }
 
