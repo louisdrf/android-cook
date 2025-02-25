@@ -12,6 +12,7 @@ import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.ApiResponseGetLikedRecipes
 import com.esgi4al.discooker.models.Recipe
 import com.esgi4al.discooker.service.ApiClient
+import com.esgi4al.discooker.ui.recyclerViewAdapters.account.AccountFavoriteRecipeAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +20,7 @@ import retrofit2.Response
 class AccountFavoritesFragment : Fragment(R.layout.fragment_favorite) {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var recipeFavoriteAdapter: RecipeFavoriteAdapter
+    private lateinit var recipeFavoriteAdapter: AccountFavoriteRecipeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +30,7 @@ class AccountFavoritesFragment : Fragment(R.layout.fragment_favorite) {
 
         recyclerView = rootView.findViewById(R.id.recyclerViewFavorites)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recipeFavoriteAdapter = RecipeFavoriteAdapter(
+        recipeFavoriteAdapter = AccountFavoriteRecipeAdapter(
             recipes = emptyList(),
             onFavoriteClicked = { recipe -> removeLikedRecipe(recipe) },
             showFavoriteButton = true

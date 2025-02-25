@@ -54,7 +54,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         override fun createFragment(position: Int): Fragment {
             return when (position) {
                 0 -> AccountFavoritesFragment()
-                1 -> RecipeFragment()
+                1 -> AccountRecipeFragment()
                 else -> throw IllegalStateException("Invalid position")
             }
         }

@@ -18,15 +18,18 @@ import com.esgi4al.discooker.models.Category
 import com.esgi4al.discooker.models.Recipe
 import com.esgi4al.discooker.models.Region
 import com.esgi4al.discooker.repositories.HomePageGlobalDataRepository
+import com.esgi4al.discooker.ui.fragments.recipes.RecipeDetailFragment
+import com.esgi4al.discooker.ui.fragments.users.UserProfileFragment
 import com.esgi4al.discooker.ui.interfaces.FragmentNavigation
 import com.esgi4al.discooker.ui.interfaces.HomePageItemsClickHandler
-import com.esgi4al.discooker.ui.recyclerViewAdapters.CategoriesRVAdapter
-import com.esgi4al.discooker.ui.recyclerViewAdapters.RecipesRVAdapter
-import com.esgi4al.discooker.ui.recyclerViewAdapters.RegionsRVAdapter
+import com.esgi4al.discooker.ui.interfaces.UserItemClickHandler
+import com.esgi4al.discooker.ui.recyclerViewAdapters.recipes.CategoriesRVAdapter
+import com.esgi4al.discooker.ui.recyclerViewAdapters.recipes.RecipesRVAdapter
+import com.esgi4al.discooker.ui.recyclerViewAdapters.recipes.RegionsRVAdapter
 import com.esgi4al.discooker.ui.viewModels.HomePageViewModel
 import com.esgi4al.discooker.ui.viewModels.factories.HomePageViewModelFactory
 
-class HomePageFragment: Fragment(), HomePageItemsClickHandler {
+class HomePageFragment: Fragment(), HomePageItemsClickHandler, UserItemClickHandler {
 
     private lateinit var searchResultsTv: TextView
     private lateinit var categoriesRv: RecyclerView
@@ -114,7 +117,7 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
     private fun setUpRecipesRv(recipes: List<Recipe>, fragmentView: View) {
         recipesRv = fragmentView.findViewById(R.id.home_page_recipes_rv)
         recipesRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        recipesRv.adapter = RecipesRVAdapter(recipes, this)
+        recipesRv.adapter = RecipesRVAdapter(recipes, this, this)
     }
 
     private fun setUpCategoriesRv(categories: List<Category>, fragmentView: View) {
@@ -161,5 +164,9 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler {
         swipeRefreshLayout.isRefreshing = true
         selectedRegionName = ""
         homeViewModel.fetchRecipesBySearch(currentSearch, selectedCategoryName, selectedRegionName)
+    }
+
+    override fun onUserClick(userId: String) {
+        fragmentNavigation?.loadFragment(UserProfileFragment.newInstance(userId))
     }
 }
