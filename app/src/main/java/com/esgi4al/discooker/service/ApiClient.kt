@@ -64,4 +64,8 @@ object ApiClient {
     fun getUsersService(): UsersService {
         return getRetrofit().create(UsersService::class.java)
     }
+
+    fun getUserService(): UserService {
+        return getRetrofit().create(UserService::class.java)
+    }
 }
