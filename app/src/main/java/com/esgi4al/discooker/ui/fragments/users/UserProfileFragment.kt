@@ -61,6 +61,10 @@ class UserProfileFragment: Fragment(), UserRecipeClickHandler {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val userId = arguments?.getString("userId") ?: return
+
+        viewModel.getUserData(userId)
+
         viewModel.userData.observe(viewLifecycleOwner) { userData ->
             setUpUserCardData(userData, view)
         }
