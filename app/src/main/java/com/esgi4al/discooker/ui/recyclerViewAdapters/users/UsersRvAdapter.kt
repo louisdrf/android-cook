@@ -27,6 +27,7 @@ class UsersRvAdapter(
         Glide
             .with(holder.itemView)
             .load("https://robohash.org/${user.username}")
+            .circleCrop()
             .into(holder.userProfileImage)
 
         holder.userName.text = user.username

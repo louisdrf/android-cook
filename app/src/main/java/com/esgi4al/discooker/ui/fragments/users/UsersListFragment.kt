@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -104,7 +105,7 @@ class UsersListFragment: Fragment(), UserItemClickHandler {
 
     private fun setUpUsersRv(users: List<ListableUser>, fragmentView: View) {
         usersListRv = fragmentView.findViewById(R.id.users_list_rv)
-        usersListRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        usersListRv.layoutManager = GridLayoutManager(requireContext(), 2)
         usersListRv.adapter = UsersRvAdapter(users, this)
     }
 
