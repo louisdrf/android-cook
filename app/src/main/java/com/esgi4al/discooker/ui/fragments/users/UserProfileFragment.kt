@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.Visibility
 import com.bumptech.glide.Glide
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.ListableUser
@@ -31,6 +32,8 @@ class UserProfileFragment: Fragment(), UserRecipeClickHandler {
     }
     private var fragmentNavigation: FragmentNavigation? = null
     private lateinit var userRecipesRv: RecyclerView
+    private lateinit var userNoRecipeTv: TextView
+    private lateinit var userCreatedRecipesTitleTV: TextView
 
     companion object {
         fun newInstance(userId: String): UserProfileFragment {
@@ -54,6 +57,8 @@ class UserProfileFragment: Fragment(), UserRecipeClickHandler {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_user_profile, container, false)
+        userNoRecipeTv = view.findViewById(R.id.userProfileNoRecipeTv)
+        userCreatedRecipesTitleTV = view.findViewById(R.id.recipesTitle)
         return view
     }
 
@@ -65,11 +70,24 @@ class UserProfileFragment: Fragment(), UserRecipeClickHandler {
         viewModel.getUserData(userId)
         viewModel.getUserRecipes(userId)
 
+        var username: String? = null
+
         viewModel.userData.observe(viewLifecycleOwner) { userData ->
+            if (userData != null) {
+                username = userData.username
+            }
             setUpUserCardData(userData, view)
         }
 
         viewModel.userRecipes.observe(viewLifecycleOwner) { recipes ->
+            if (recipes.isEmpty()) {
+                val nameToDisplay = username ?: "Cet utilisateur"
+                userNoRecipeTv.text = "$nameToDisplay n'a pas encore créé de recette"
+                userNoRecipeTv.visibility = View.VISIBLE
+            } else {
+                userNoRecipeTv.visibility = View.GONE
+                userCreatedRecipesTitleTV.visibility = View.VISIBLE
+            }
             setUpUserRecipesRv(recipes, view)
         }
     }
