@@ -46,8 +46,8 @@ object ApiClient {
             .build()
     }
 
-    fun getGlobalDataService(): HomePageGlobalDataService {
-        return getRetrofit().create(HomePageGlobalDataService::class.java)
+    fun getGlobalDataService(): GlobalDataService {
+        return getRetrofit().create(GlobalDataService::class.java)
     }
 
     fun getAuthService(): AuthService {

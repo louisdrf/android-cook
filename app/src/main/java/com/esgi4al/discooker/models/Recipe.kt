@@ -5,6 +5,16 @@ data class ApiResponseGetRecipes(
 )
 
 
+data class ApiRequestPostRecipe(
+    val title: String,
+    val description: String,
+    val ingredients: List<Ingredient>,
+    val instructions: List<Instruction>,
+    val category: Category,
+    val region: Region,
+)
+
+
 data class Recipe(
     val _id: String,
     val user: User,

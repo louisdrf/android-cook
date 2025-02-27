@@ -1,5 +1,6 @@
 package com.esgi4al.discooker.service
 
+import com.esgi4al.discooker.models.ApiRequestPostRecipe
 import com.esgi4al.discooker.models.CommentRequest
 import com.esgi4al.discooker.models.Recipe
 import retrofit2.http.Body
@@ -11,6 +12,9 @@ import retrofit2.http.Path
 interface RecipeService {
     @GET("recipes")
     suspend fun getRecipes(): List<Recipe>
+
+    @POST("recipes")
+    suspend fun createRecipe(@Body recipe: ApiRequestPostRecipe): Recipe
 
     @GET("recipes/{id}")
     suspend fun getRecipeDetails(@Path("id") id: String): Recipe
