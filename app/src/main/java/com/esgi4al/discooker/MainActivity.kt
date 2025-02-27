@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.esgi4al.discooker.ui.auth.LoginActivity
 import com.esgi4al.discooker.ui.fragments.CreateRecipeFragment
 import com.esgi4al.discooker.ui.fragments.HomePageFragment
+import com.esgi4al.discooker.ui.fragments.account.AccountFragment
 import com.esgi4al.discooker.ui.fragments.users.UsersListFragment
 import com.esgi4al.discooker.ui.interfaces.FragmentNavigation
 
@@ -40,6 +41,10 @@ class MainActivity : AppCompatActivity(), FragmentNavigation {
                 }
                 R.id.navigation_add -> {
                     loadFragment(CreateRecipeFragment())
+                    true
+                }
+                R.id.navigation_profile -> {
+                    loadFragment(AccountFragment())
                     true
                 }
                 else -> false
