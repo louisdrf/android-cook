@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import com.esgi4al.discooker.ui.auth.LoginActivity
-import com.esgi4al.discooker.ui.fragments.CreateRecipeFragment
+import com.esgi4al.discooker.ui.fragments.recipes.CreateRecipeFragment
 import com.esgi4al.discooker.ui.fragments.HomePageFragment
 import com.esgi4al.discooker.ui.fragments.account.AccountFragment
 import com.esgi4al.discooker.ui.fragments.users.UsersListFragment

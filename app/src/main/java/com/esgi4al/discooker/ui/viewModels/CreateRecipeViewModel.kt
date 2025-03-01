@@ -44,8 +44,7 @@ class CreateRecipeViewModel(
     fun addInstruction(text: String) {
         val newInstruction = Instruction(
             step = (_instructions.value?.size ?: 0) + 1,
-            instruction = text,
-            ""
+            instruction = text
         )
         _instructions.value = _instructions.value?.plus(newInstruction)
     }

@@ -1,4 +1,4 @@
-package com.esgi4al.discooker.ui.fragments
+package com.esgi4al.discooker.ui.fragments.recipes
 
 import android.content.Context
 import android.os.Bundle
@@ -24,10 +24,6 @@ import com.esgi4al.discooker.models.Ingredient
 import com.esgi4al.discooker.models.Instruction
 import com.esgi4al.discooker.models.Region
 import com.esgi4al.discooker.repositories.CreateRecipeGlobalDataRepository
-import com.esgi4al.discooker.service.ApiClient
-import com.esgi4al.discooker.service.GlobalDataService
-import com.esgi4al.discooker.service.RecipeService
-import com.esgi4al.discooker.ui.fragments.recipes.RecipeDetailFragment
 import com.esgi4al.discooker.ui.interfaces.FragmentNavigation
 import com.esgi4al.discooker.ui.recipe.IngredientsAdapter
 import com.esgi4al.discooker.ui.recipe.InstructionsAdapter
@@ -47,9 +43,7 @@ class CreateRecipeFragment : Fragment() {
     private var isFirstSelection = true
 
     private val viewModel: CreateRecipeViewModel by viewModels() {
-        val globalDataService: GlobalDataService = ApiClient.getGlobalDataService()
-        val recipeService: RecipeService = ApiClient.getRecipeService()
-        CreateRecipeViewModelFactory(CreateRecipeGlobalDataRepository(globalDataService, recipeService), this)
+        CreateRecipeViewModelFactory(CreateRecipeGlobalDataRepository(), this)
     }
 
     override fun onCreateView(
