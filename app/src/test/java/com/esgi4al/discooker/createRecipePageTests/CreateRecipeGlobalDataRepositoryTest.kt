@@ -1,5 +1,6 @@
 package com.esgi4al.discooker.createRecipePageTests
 
+import com.esgi4al.discooker.TestHelpers
 import com.esgi4al.discooker.models.*
 import com.esgi4al.discooker.repositories.CreateRecipeGlobalDataRepository
 import com.esgi4al.discooker.service.ApiClient
@@ -38,7 +39,7 @@ class CreateRecipeGlobalDataRepositoryTest {
 
     @Test
     fun `postRecipe should return Recipe when successful`() = runBlocking {
-        val mockRecipe = getMockRecipe()
+        val mockRecipe = TestHelpers.getMockRecipe()
         val mockRecipeRequest = getMockRecipeRequest(mockRecipe)
 
         `when`(recipeServiceMock.createRecipe(mockRecipeRequest)).thenReturn(mockRecipe)
@@ -48,7 +49,7 @@ class CreateRecipeGlobalDataRepositoryTest {
 
     @Test
     fun `postRecipe should return null when HttpException is thrown`() = runBlocking {
-        val mockRecipe = getMockRecipe()
+        val mockRecipe = TestHelpers.getMockRecipe()
         val mockRecipeRequest = getMockRecipeRequest(mockRecipe)
 
         val mockResponse = Mockito.mock(retrofit2.Response::class.java) as retrofit2.Response<*>
@@ -76,34 +77,6 @@ class CreateRecipeGlobalDataRepositoryTest {
 
         val result = createRecipeGlobalDataRepository.getIngredientsBySearch("Sugar")
         assertEquals(null, result)
-    }
-
-
-    private fun getMockRecipe(): Recipe {
-        val mockUser = User(_id = "1", username = "John Doe", email = "john@example.com")
-        val mockCategory = Category(name = "Dessert", imgUrl = "category.png")
-        val mockRegion = Region(name = "France", imgUrl = "region.png")
-        val mockIngredients = listOf(Ingredient(name = "Sugar", quantity = "100g", _id = "1"))
-        val mockInstructions = listOf(Instruction(step = 1, instruction = "Mix everything", _id = "1"))
-        val mockComments = listOf(Comment(user = mockUser, content = "Great recipe!"))
-
-        val mockRecipe = Recipe(
-            _id = "1",
-            user = mockUser,
-            title = "Chocolate Cake",
-            description = "A delicious chocolate cake",
-            thumbnail = "cake.png",
-            ingredients = mockIngredients,
-            instructions = mockInstructions,
-            category = mockCategory,
-            region = mockRegion,
-            likes = listOf("2", "3"),
-            comments = mockComments,
-            createdAt = "2024-03-01",
-            updatedAt = "2024-03-02"
-        )
-
-        return mockRecipe
     }
 
     private fun getMockRecipeRequest(mockRecipe: Recipe): ApiRequestPostRecipe {
