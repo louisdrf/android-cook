@@ -9,6 +9,7 @@ import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.auth.RegisterRequest
 import com.esgi4al.discooker.models.auth.RegisterResponse
 import com.esgi4al.discooker.service.ApiClient
+import com.esgi4al.discooker.ui.shared.ToastUtils.showCustomToast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,20 +40,25 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun register(username: String, email: String, password: String) {
+        if (username.isEmpty() || password.isEmpty()) {
+            showCustomToast(this@RegisterActivity, "Tous les champs doivent être remplis.", false)
+            return
+        }
         val registerRequest = RegisterRequest(username = username, email = email, password = password)
 
         ApiClient.getAuthService().register(registerRequest).enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                 if (response.isSuccessful) {
+                    showCustomToast(this@RegisterActivity, "Inscription effectuée avec succès.", true)
                     startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                     finish()
                 } else {
-                    // error
+                    showCustomToast(this@RegisterActivity, "Une erreur est survenue.", false)
                 }
             }
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                // error
+                showCustomToast(this@RegisterActivity, "Une erreur est survenue.", false)
             }
         })
     }

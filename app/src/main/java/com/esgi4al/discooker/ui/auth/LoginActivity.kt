@@ -11,6 +11,7 @@ import com.esgi4al.discooker.MainActivity
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.auth.LoginRequest
 import com.esgi4al.discooker.service.ApiClient
+import com.esgi4al.discooker.ui.shared.ToastUtils.showCustomToast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
@@ -46,10 +47,10 @@ class LoginActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 if (username.isEmpty() || password.isEmpty()) {
-                    showErrorDialog("Validation Error", "Username and password cannot be empty.")
+                    showCustomToast(this@LoginActivity, "Tous les champs doivent être remplis", false)
+                    return@launch
                 }
                 val response: Response<ResponseBody> = ApiClient.getAuthService().login(loginRequest)
-                Log.d("coderesponse", "Response Body: ${response}")
 
                 if (response.isSuccessful) {
                     val responseBody = response.body()?.string()
@@ -64,13 +65,13 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
                     } else {
-                        showErrorDialog("Login Failed", "No data found in the response.")
+                        showCustomToast(this@LoginActivity, "Une erreur inattendue est survenue.", false)
                     }
                 } else {
-                    showErrorDialog("Login Failed", "Invalid username or password. Please try again.")
+                    showCustomToast(this@LoginActivity, "Identifiants incorrects.", false)
                 }
             } catch (e: Exception) {
-                showErrorDialog("Error", "Failed to connect. Please check your internet connection and try again.")
+                showCustomToast(this@LoginActivity, "Erreur de connexion. Vérifiez votre connexion internet et réessayez.", false)
             }
         }
     }
@@ -78,16 +79,5 @@ class LoginActivity : AppCompatActivity() {
     private fun extractAuthToken(responseBody: String): String {
         val jsonObject = JSONObject(responseBody)
         return jsonObject.getString("accessToken")
-    }
-
-
-    private fun showErrorDialog(title: String, message: String) {
-        MaterialAlertDialogBuilder(this@LoginActivity)
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton("OK") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .show()
     }
 }
