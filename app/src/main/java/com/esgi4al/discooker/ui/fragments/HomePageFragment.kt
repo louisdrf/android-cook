@@ -18,6 +18,8 @@ import com.esgi4al.discooker.models.Category
 import com.esgi4al.discooker.models.Recipe
 import com.esgi4al.discooker.models.Region
 import com.esgi4al.discooker.repositories.HomePageGlobalDataRepository
+import com.esgi4al.discooker.service.ApiClient
+import com.esgi4al.discooker.service.GlobalDataService
 import com.esgi4al.discooker.ui.fragments.recipes.RecipeDetailFragment
 import com.esgi4al.discooker.ui.fragments.users.UserProfileFragment
 import com.esgi4al.discooker.ui.interfaces.FragmentNavigation
@@ -45,7 +47,8 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler, UserItemClickHand
     private val searchHandler = Handler(Looper.getMainLooper())
 
     private val homeViewModel: HomePageViewModel by viewModels {
-        HomePageViewModelFactory(HomePageGlobalDataRepository(), this)
+        val globalDataService: GlobalDataService = ApiClient.getGlobalDataService()
+        HomePageViewModelFactory(HomePageGlobalDataRepository(globalDataService), this)
     }
 
     override fun onCreateView(

@@ -6,14 +6,16 @@ import com.esgi4al.discooker.models.Category
 import com.esgi4al.discooker.models.Ingredient
 import com.esgi4al.discooker.models.Recipe
 import com.esgi4al.discooker.models.Region
-import com.esgi4al.discooker.service.ApiClient
+import com.esgi4al.discooker.service.GlobalDataService
+import com.esgi4al.discooker.service.RecipeService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
-class CreateRecipeGlobalDataRepository {
-    private val globalDataService = ApiClient.getGlobalDataService()
-    private val recipeService = ApiClient.getRecipeService()
+class CreateRecipeGlobalDataRepository(
+    private var globalDataService: GlobalDataService,
+    private var recipeService: RecipeService
+) {
 
     suspend fun postRecipe(recipe: ApiRequestPostRecipe): Recipe? {
         return try {

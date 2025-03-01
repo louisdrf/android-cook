@@ -3,14 +3,12 @@ package com.esgi4al.discooker.repositories
 import android.util.Log
 import com.esgi4al.discooker.models.ListableUser
 import com.esgi4al.discooker.models.Recipe
-import com.esgi4al.discooker.service.ApiClient
+import com.esgi4al.discooker.service.UserService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
-class UserProfileDataRepository {
-
-    private val userService = ApiClient.getUserService()
+class UserProfileDataRepository(private var userService: UserService) {
 
     suspend fun getUserData(userId: String): ListableUser? {
         return try {

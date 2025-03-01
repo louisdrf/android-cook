@@ -11,12 +11,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.esgi4al.discooker.R
 import com.esgi4al.discooker.models.ListableUser
 import com.esgi4al.discooker.repositories.UsersListDataRepository
+import com.esgi4al.discooker.service.ApiClient
+import com.esgi4al.discooker.service.UsersService
 import com.esgi4al.discooker.ui.interfaces.FragmentNavigation
 import com.esgi4al.discooker.ui.interfaces.UserItemClickHandler
 import com.esgi4al.discooker.ui.recyclerViewAdapters.users.UsersRvAdapter
@@ -35,7 +36,8 @@ class UsersListFragment: Fragment(), UserItemClickHandler {
     private val searchHandler = Handler(Looper.getMainLooper())
 
     private val usersListViewModel: UsersListViewModel by viewModels {
-        UsersListViewModelFactory(UsersListDataRepository(), this)
+        val usersService: UsersService = ApiClient.getUsersService()
+        UsersListViewModelFactory(UsersListDataRepository(usersService), this)
     }
 
     override fun onAttach(context: Context) {

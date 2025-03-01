@@ -4,15 +4,13 @@ import android.util.Log
 import com.esgi4al.discooker.models.Category
 import com.esgi4al.discooker.models.Recipe
 import com.esgi4al.discooker.models.Region
-import com.esgi4al.discooker.service.ApiClient
+import com.esgi4al.discooker.service.GlobalDataService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 
-class HomePageGlobalDataRepository {
-
-    private val globalDataService = ApiClient.getGlobalDataService()
+class HomePageGlobalDataRepository(private var globalDataService: GlobalDataService) {
 
     suspend fun getRecipesBySearch(recipeName: String?, categoryName: String?, regionName: String?): List<Recipe>? {
         return try {
