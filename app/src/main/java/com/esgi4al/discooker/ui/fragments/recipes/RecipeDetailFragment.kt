@@ -78,6 +78,7 @@ class RecipeDetailFragment : Fragment() {
 
     private fun updateUI(recipe: Recipe) {
         val gridLayout = view?.findViewById<GridLayout>(R.id.recipe_ingredients)
+        gridLayout?.removeAllViews()
 
         recipe.ingredients.forEach { ingredient ->
             val ingredientLayout = LinearLayout(context).apply {

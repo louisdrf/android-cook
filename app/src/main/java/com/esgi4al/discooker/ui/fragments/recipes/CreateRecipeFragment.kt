@@ -1,4 +1,4 @@
-package com.esgi4al.discooker.ui.fragments
+package com.esgi4al.discooker.ui.fragments.recipes
 
 import android.content.Context
 import android.os.Bundle
@@ -24,7 +24,6 @@ import com.esgi4al.discooker.models.Ingredient
 import com.esgi4al.discooker.models.Instruction
 import com.esgi4al.discooker.models.Region
 import com.esgi4al.discooker.repositories.CreateRecipeGlobalDataRepository
-import com.esgi4al.discooker.ui.fragments.recipes.RecipeDetailFragment
 import com.esgi4al.discooker.ui.interfaces.FragmentNavigation
 import com.esgi4al.discooker.ui.recipe.IngredientsAdapter
 import com.esgi4al.discooker.ui.recipe.InstructionsAdapter
