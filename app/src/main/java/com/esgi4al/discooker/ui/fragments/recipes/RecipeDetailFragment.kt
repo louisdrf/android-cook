@@ -19,6 +19,7 @@ import com.esgi4al.discooker.R
 import coil3.load
 import com.esgi4al.discooker.models.Recipe
 import com.esgi4al.discooker.ui.recyclerViewAdapters.recipes.CommentsAdapter
+import com.esgi4al.discooker.ui.shared.ToastUtils
 import com.esgi4al.discooker.ui.viewModels.RecipeDetailViewModel
 
 class RecipeDetailFragment : Fragment() {
@@ -72,6 +73,8 @@ class RecipeDetailFragment : Fragment() {
             updateLiked(newIsLiked)
             recipeId?.let {
                 viewModel.toggleLikeRecipe(recipeId!!, requireContext(), newIsLiked)
+                val toastText = if (newIsLiked) "Recette ajoutée à vos favoris !" else "Recette supprimée de vos favoris."
+                ToastUtils.showCustomToast(requireContext(), toastText, true)
             }
         }
     }
