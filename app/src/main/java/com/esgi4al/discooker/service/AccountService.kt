@@ -12,7 +12,7 @@ interface AccountService {
     @GET("like/liked-recipes")
     fun getLikedRecipesByUser(): Call<ApiResponseGetRecipes>
 
-    @GET("recipes/recipeByUser")
+    @GET("recipes/user")
     fun getUserRecipes(): Call<List<Recipe>>
 
     @POST("recipes/{id}/like")
