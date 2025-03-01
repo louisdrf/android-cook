@@ -22,11 +22,7 @@ class CreateRecipeGlobalDataRepository(
             withContext(Dispatchers.IO) {
                 recipeService.createRecipe(recipe)
             }
-        } catch (e: HttpException) {
-            Log.e("API_ERROR", "HTTP Error: ${e.code()} - ${e.message()}")
-            null
         } catch (e: Exception) {
-            Log.e("API_ERROR", "Network Error: ${e.message}")
             null
         }
     }
@@ -36,11 +32,7 @@ class CreateRecipeGlobalDataRepository(
             withContext(Dispatchers.IO) {
                 globalDataService.getIngredientsBySearch(ingredientName)
             }
-        } catch (e: HttpException) {
-            Log.e("API_ERROR", "HTTP Error: ${e.code()} - ${e.message()}")
-            null
-        } catch (e: Exception) {
-            Log.e("API_ERROR", "Network Error: ${e.message}")
+        }  catch (e: Exception) {
             null
         }
     }
@@ -50,11 +42,7 @@ class CreateRecipeGlobalDataRepository(
             withContext(Dispatchers.IO) {
                 globalDataService.getCategories()
             }
-        } catch (e: HttpException) {
-            Log.e("API_ERROR", "HTTP Error: ${e.code()} - ${e.message()}")
-            null
-        } catch (e: Exception) {
-            Log.e("API_ERROR", "Network Error: ${e.message}")
+        }  catch (e: Exception) {
             null
         }
     }
@@ -64,11 +52,7 @@ class CreateRecipeGlobalDataRepository(
             withContext(Dispatchers.IO) {
                 globalDataService.getRegions()
             }
-        } catch (e: HttpException) {
-            Log.e("API_ERROR", "HTTP Error: ${e.code()} - ${e.message()}")
-            null
         } catch (e: Exception) {
-            Log.e("API_ERROR", "Network Error: ${e.message}")
             null
         }
     }
