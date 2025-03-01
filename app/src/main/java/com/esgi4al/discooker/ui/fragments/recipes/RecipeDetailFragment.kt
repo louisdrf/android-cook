@@ -65,7 +65,7 @@ class RecipeDetailFragment : Fragment() {
 
     private fun updateLiked(isLiked: Boolean) {
         val followTextView = view?.findViewById<TextView>(R.id.follow_tv)
-        followTextView?.text = if (isLiked) "Suivi" else "Suivre"
+        followTextView?.text = if (isLiked) "Supprimer des favoris" else "Ajouter aux favoris"
 
         followTextView?.setOnClickListener {
             val newIsLiked = !isLiked
