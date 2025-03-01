@@ -16,7 +16,7 @@ interface AccountService {
     @GET("recipes/user")
     suspend fun getUserRecipes(): List<Recipe>
 
-    @DELETE("recipes/:id")
+    @DELETE("recipes/{id}")
     suspend fun deleteUserRecipe(@Path("id") recipeId: String): Response<Unit>
 
     @DELETE("like/{id}")
