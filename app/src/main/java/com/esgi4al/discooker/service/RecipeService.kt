@@ -32,7 +32,7 @@ interface RecipeService {
         @Header("Authorization") token: String
     ): Boolean
 
-    @POST("like/{id}")
+    @POST("like/toggle-like/{id}")
     suspend fun toggleLikeRecipe(
         @Path("id") id: String,
         @Header("Authorization") token: String
