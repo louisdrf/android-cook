@@ -125,7 +125,39 @@ class RecipeDetailFragment : Fragment() {
         view?.findViewById<TextView>(R.id.recipe_title_tv)?.text = recipe.title
         view?.findViewById<TextView>(R.id.recipe_region_tv)?.text = recipe.region.name
         view?.findViewById<TextView>(R.id.recipe_category_tv)?.text = recipe.category.name
-        view?.findViewById<TextView>(R.id.recipe_instructions_tv)?.text = recipe.instructions.joinToString("\n") { it.instruction }
+
+        val instructionsContainer = view?.findViewById<LinearLayout>(R.id.recipe_instructions_container)
+        instructionsContainer?.removeAllViews()
+
+        recipe.instructions.forEach { instruction ->
+            val instructionLayout = LinearLayout(context).apply {
+                orientation = LinearLayout.HORIZONTAL
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply { setMargins(0, 8, 0, 8) }
+            }
+
+            val stepTextView = TextView(context).apply {
+                text = "${instruction.step}."
+                textSize = 18f
+                setTypeface(typeface, android.graphics.Typeface.BOLD)
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply { setMargins(0, 0, 16, 0) }
+            }
+
+            val instructionTextView = TextView(context).apply {
+                text = instruction.instruction
+                textSize = 18f
+            }
+
+            instructionLayout.addView(stepTextView)
+            instructionLayout.addView(instructionTextView)
+            instructionsContainer?.addView(instructionLayout)
+        }
+
 
         val submitButton = view?.findViewById<Button>(R.id.submit_comment_btn)
         submitButton?.setOnClickListener {
