@@ -1,57 +1,258 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:padding="12dp"
     android:layout_margin="8dp"
-    android:clipToPadding="false"
-    android:elevation="2dp"
-    android:gravity="center_vertical">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:backgroundTint="@android:color/white">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:id="@+id/accountFavoriteRecipeCard"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingEnd="8dp"
-        android:paddingStart="0dp">
+        android:padding="16dp">
 
-        <TextView
-            android:id="@+id/recipeTitle"
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/accountFavoriteRecipeCreatorHeaderCard"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            android:layout_marginBottom="6dp"
+            android:backgroundTint="@color/recipe_user_header_color"
+            android:padding="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/accountFavoriteUserProfileImage"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="12dp"
+                    android:contentDescription="Image du profil utilisateur"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/accountFavoriteUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nom de l'utilisateur"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="12dp">
+
+            <ImageView
+                android:id="@+id/accountFavoriteRecipeImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="Image de la recette"
+                android:layout_gravity="center"/>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- Nom de la recette -->
+        <TextView
+            android:id="@+id/accountFavoriteRecipeTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Nom de la recette"
+            android:textSize="16sp"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@android:color/black"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:layout_marginBottom="4dp" />
+            android:textColor="@android:color/black" />
 
-        <TextView
-            android:id="@+id/recipeDescription"
+        <!-- Catégorie et Région -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="32dp"
+                android:backgroundTint="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="6dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginVertical="2dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="8dp"
+                        app:cardCornerRadius="50dp">
+
+                        <ImageView
+                            android:id="@+id/accountFavoriteRecipeCategoryImage"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="12dp"
+                            android:contentDescription="Image de la catégorie"
+                            android:scaleType="centerCrop" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/accountFavoriteRecipeCategoryName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Nom de la catégorie"
+                        android:layout_marginEnd="6dp"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/black"
+                        android:maxLines="1"
+                        android:fontFamily="sans-serif-medium" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Région -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                app:cardCornerRadius="32dp"
+                android:backgroundTint="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="6dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginVertical="2dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="8dp"
+                        app:cardCornerRadius="50dp">
+
+                        <ImageView
+                            android:id="@+id/accountFavoriteRecipeRegionImage"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="12dp"
+                            android:contentDescription="Image de la région"
+                            android:scaleType="centerCrop" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Texte de la région -->
+                    <TextView
+                        android:id="@+id/accountFavoriteRecipeRegionName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Nom de la région"
+                        android:textSize="12sp"
+                        android:layout_marginEnd="6dp"
+                        android:textColor="@android:color/black"
+                        android:maxLines="1"
+                        android:fontFamily="sans-serif-medium" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <!-- Nombre de likes -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:lineSpacingExtra="2dp" />
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="12dp">
 
-    <Button
-        android:id="@+id/favoriteButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@android:color/transparent"
-        app:icon="@drawable/baseline_favorite_24"
-        app:iconSize="32dp"
-        app:iconTint="@android:color/holo_red_dark"
-        android:contentDescription="@string/like_button"
-        android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:padding="8dp"
-        android:elevation="4dp"
-        android:scaleType="centerInside" />
-</LinearLayout>
+            <TextView
+                android:id="@+id/accountFavoriteRecipeNbLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="165"
+                android:textSize="12sp"
+                android:layout_marginEnd="4dp"
+                android:textColor="@android:color/black" />
+
+            <ImageView
+                android:id="@+id/accountFavoriteLikeIcon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/baseline_favorite_24"
+                android:contentDescription="Icône de like"
+                app:tint="@color/discooker_red_color" />
+
+            <Space
+                android:layout_width="6dp"
+                android:layout_height="0dp"/>
+
+            <TextView
+                android:id="@+id/accountFavoriteRecipeNbComments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8"
+                android:textSize="12sp"
+                android:layout_marginEnd="4dp"
+                android:textColor="@android:color/black" />
+
+            <ImageView
+                android:id="@+id/accountFavoriteCommentIcon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_comment"
+                app:tint="@color/discooker_red_color"
+                android:contentDescription="Icône de like" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/accountFavoriteDeleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Supprimer des favoris"
+            android:textColor="@android:color/black"
+            android:drawableEnd="@drawable/ic_delete"
+            android:background="?attr/selectableItemBackground"
+            android:paddingEnd="8dp"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:drawableTint="@color/discooker_red_color" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
