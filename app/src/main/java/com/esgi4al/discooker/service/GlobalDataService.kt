@@ -20,12 +20,6 @@ interface GlobalDataService {
         @Query("regionName") regionName: String?
     ): List<Recipe>
 
-    @GET("recipes/category/{categoryName}")
-    suspend fun getRecipesByCategory(@Path("categoryName") id: String): List<Recipe>
-
-    @GET("recipes/region/{regionName}")
-    suspend fun getRecipesByRegion(@Path("regionName") id: String): List<Recipe>
-
     @GET("search/ingredients")
     suspend fun getIngredientsBySearch(
         @Query("ingredientName") ingredientName: String?
