@@ -29,7 +29,7 @@ import com.esgi4al.discooker.ui.recyclerViewAdapters.recipes.CategoriesRVAdapter
 import com.esgi4al.discooker.ui.recyclerViewAdapters.recipes.RecipesRVAdapter
 import com.esgi4al.discooker.ui.recyclerViewAdapters.recipes.RegionsRVAdapter
 import com.esgi4al.discooker.ui.viewModels.HomePageViewModel
-import com.esgi4al.discooker.ui.viewModels.factories.HomePageViewModelFactory
+import com.esgi4al.discooker.ui.viewModels.factories.ViewModelFactory
 
 class HomePageFragment: Fragment(), HomePageItemsClickHandler, UserItemClickHandler {
 
@@ -47,8 +47,9 @@ class HomePageFragment: Fragment(), HomePageItemsClickHandler, UserItemClickHand
     private val searchHandler = Handler(Looper.getMainLooper())
 
     private val homeViewModel: HomePageViewModel by viewModels {
-        val globalDataService: GlobalDataService = ApiClient.getGlobalDataService()
-        HomePageViewModelFactory(HomePageGlobalDataRepository(globalDataService), this)
+        val service: GlobalDataService = ApiClient.getGlobalDataService()
+        val repository = HomePageGlobalDataRepository(service)
+        ViewModelFactory(repository, this)
     }
 
     override fun onCreateView(

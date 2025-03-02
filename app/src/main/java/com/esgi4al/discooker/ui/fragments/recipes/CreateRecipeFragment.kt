@@ -28,10 +28,10 @@ import com.esgi4al.discooker.service.ApiClient
 import com.esgi4al.discooker.service.GlobalDataService
 import com.esgi4al.discooker.service.RecipeService
 import com.esgi4al.discooker.ui.interfaces.FragmentNavigation
-import com.esgi4al.discooker.ui.recipe.IngredientsAdapter
-import com.esgi4al.discooker.ui.recipe.InstructionsAdapter
+import com.esgi4al.discooker.ui.recyclerViewAdapters.recipeDetails.IngredientsAdapter
+import com.esgi4al.discooker.ui.recyclerViewAdapters.recipeDetails.InstructionsAdapter
 import com.esgi4al.discooker.ui.viewModels.CreateRecipeViewModel
-import com.esgi4al.discooker.ui.viewModels.factories.CreateRecipeViewModelFactory
+import com.esgi4al.discooker.ui.viewModels.factories.ViewModelFactory
 
 
 class CreateRecipeFragment : Fragment() {
@@ -48,7 +48,8 @@ class CreateRecipeFragment : Fragment() {
     private val viewModel: CreateRecipeViewModel by viewModels() {
         val globalDataService: GlobalDataService = ApiClient.getGlobalDataService()
         val recipeService: RecipeService = ApiClient.getRecipeService()
-        CreateRecipeViewModelFactory(CreateRecipeGlobalDataRepository(globalDataService, recipeService), this)
+        val repository = CreateRecipeGlobalDataRepository(globalDataService, recipeService)
+        ViewModelFactory(repository, this)
     }
 
     override fun onCreateView(

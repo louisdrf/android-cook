@@ -22,7 +22,7 @@ import com.esgi4al.discooker.ui.interfaces.FragmentNavigation
 import com.esgi4al.discooker.ui.interfaces.UserItemClickHandler
 import com.esgi4al.discooker.ui.recyclerViewAdapters.users.UsersRvAdapter
 import com.esgi4al.discooker.ui.viewModels.UsersListViewModel
-import com.esgi4al.discooker.ui.viewModels.factories.UsersListViewModelFactory
+import com.esgi4al.discooker.ui.viewModels.factories.ViewModelFactory
 
 class UsersListFragment: Fragment(), UserItemClickHandler {
 
@@ -37,7 +37,8 @@ class UsersListFragment: Fragment(), UserItemClickHandler {
 
     private val usersListViewModel: UsersListViewModel by viewModels {
         val usersService: UsersService = ApiClient.getUsersService()
-        UsersListViewModelFactory(UsersListDataRepository(usersService), this)
+        val repository = UsersListDataRepository(usersService)
+        ViewModelFactory(repository, this)
     }
 
     override fun onAttach(context: Context) {

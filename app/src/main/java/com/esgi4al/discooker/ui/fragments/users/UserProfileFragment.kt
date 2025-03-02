@@ -25,13 +25,14 @@ import com.esgi4al.discooker.ui.interfaces.FragmentNavigation
 import com.esgi4al.discooker.ui.interfaces.UserRecipeClickHandler
 import com.esgi4al.discooker.ui.recyclerViewAdapters.recipes.UserProfileRecipesRvAdapter
 import com.esgi4al.discooker.ui.viewModels.UserProfileViewModel
-import com.esgi4al.discooker.ui.viewModels.factories.UserProfileViewModelFactory
+import com.esgi4al.discooker.ui.viewModels.factories.ViewModelFactory
 
 class UserProfileFragment: Fragment(), UserRecipeClickHandler {
 
     private val viewModel: UserProfileViewModel by viewModels {
         val userService: UserService = ApiClient.getUserService()
-        UserProfileViewModelFactory(UserProfileDataRepository(userService), this)
+        val repository = UserProfileDataRepository(userService)
+        ViewModelFactory(repository, this)
     }
     private var fragmentNavigation: FragmentNavigation? = null
     private lateinit var userRecipesRv: RecyclerView

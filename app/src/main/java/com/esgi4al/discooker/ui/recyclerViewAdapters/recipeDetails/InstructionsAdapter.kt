@@ -1,4 +1,4 @@
-package com.esgi4al.discooker.ui.recipe
+package com.esgi4al.discooker.ui.recyclerViewAdapters.recipeDetails
 
 import android.view.LayoutInflater
 import android.view.View

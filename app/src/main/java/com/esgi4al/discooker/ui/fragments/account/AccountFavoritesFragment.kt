@@ -22,7 +22,7 @@ import com.esgi4al.discooker.ui.interfaces.UserFavoriteRecipeClickHandler
 import com.esgi4al.discooker.ui.recyclerViewAdapters.account.AccountFavoriteRecipeAdapter
 import com.esgi4al.discooker.ui.shared.ToastUtils.showCustomToast
 import com.esgi4al.discooker.ui.viewModels.AccountFavoritesViewModel
-import com.esgi4al.discooker.ui.viewModels.factories.AccountFavoritesViewModelFactory
+import com.esgi4al.discooker.ui.viewModels.factories.ViewModelFactory
 import kotlinx.coroutines.launch
 
 
@@ -34,7 +34,8 @@ class AccountFavoritesFragment : Fragment(),
 
     private val viewModel: AccountFavoritesViewModel by viewModels {
         val accountDataService: AccountService = ApiClient.getAccountService()
-        AccountFavoritesViewModelFactory(AccountDataRepository(accountDataService), this)
+        val repository = AccountDataRepository(accountDataService)
+        ViewModelFactory(repository, this)
     }
 
     override fun onAttach(context: Context) {

@@ -24,7 +24,7 @@ import com.esgi4al.discooker.ui.interfaces.UserCreatedRecipeClickHandler
 import com.esgi4al.discooker.ui.recyclerViewAdapters.account.AccountRecipeAdapter
 import com.esgi4al.discooker.ui.shared.ToastUtils.showCustomToast
 import com.esgi4al.discooker.ui.viewModels.AccountRecipesViewModel
-import com.esgi4al.discooker.ui.viewModels.factories.AccountRecipesViewModelFactory
+import com.esgi4al.discooker.ui.viewModels.factories.ViewModelFactory
 import kotlinx.coroutines.launch
 
 class AccountRecipeFragment : Fragment(), UserCreatedRecipeClickHandler {
@@ -34,7 +34,8 @@ class AccountRecipeFragment : Fragment(), UserCreatedRecipeClickHandler {
 
     private val viewModel: AccountRecipesViewModel by viewModels {
         val accountDataService: AccountService = ApiClient.getAccountService()
-        AccountRecipesViewModelFactory(AccountDataRepository(accountDataService), this)
+        val repository = AccountDataRepository(accountDataService)
+        ViewModelFactory(repository, this)
     }
 
     override fun onCreateView(
